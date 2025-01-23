@@ -31,3 +31,51 @@ retrosheet_gamelog <- function(season) {
 
 # Read gamelog for 2024
 gl2024 <- retrosheet_gamelog(2024)
+
+# Transfer data to PostgreSQL
+if (dbExistsTable(con, "gamelogs")) {
+  dbRemoveTable(con, "gamelogs")
+}
+con |>
+  dbWriteTable(
+    name = "gamelogs", value = gl2024,
+    append = FALSE,
+    field.types = c(
+      CompletionInfo = "varchar(50)", 
+      AdditionalInfo = "varchar(255)",
+      HomeBatting1Name = "varchar(50)",
+      HomeBatting2Name = "varchar(50)",
+      HomeBatting3Name = "varchar(50)",
+      HomeBatting4Name = "varchar(50)",
+      HomeBatting5Name = "varchar(50)",
+      HomeBatting6Name = "varchar(50)",
+      HomeBatting7Name = "varchar(50)",
+      HomeBatting8Name = "varchar(50)",
+      HomeBatting9Name = "varchar(50)",
+      HomeManagerName = "varchar(50)",
+      VisitorStartingPitcherName = "varchar(50)",
+      VisitorBatting1Name = "varchar(50)",
+      VisitorBatting2Name = "varchar(50)",
+      VisitorBatting3Name = "varchar(50)",
+      VisitorBatting4Name = "varchar(50)",
+      VisitorBatting5Name = "varchar(50)",
+      VisitorBatting6Name = "varchar(50)",
+      VisitorBatting7Name = "varchar(50)",
+      VisitorBatting8Name = "varchar(50)",
+      VisitorBatting9Name = "varchar(50)",
+      VisitorManagerName = "varchar(50)",
+      HomeLineScore = "varchar(30)",
+      VisitorLineScore = "varchar(30)",
+      SavingPitcherName = "varchar(50)",
+      ForfeitInfo = "varchar(10)",
+      ProtestInfo = "varchar(10)",
+      UmpireLFID = "varchar(8)",
+      UmpireRFID = "varchar(8)",
+      UmpireLFName = "varchar(50)",
+      UmpireRFName = "varchar(50)"
+    )
+  )
+
+gamelogs <- con |>
+  tbl("gamelogs")
+head(gamelogs)
