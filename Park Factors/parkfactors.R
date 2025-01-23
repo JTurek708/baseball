@@ -79,3 +79,21 @@ con |>
 gamelogs <- con |>
   tbl("gamelogs")
 head(gamelogs)
+
+# Function to grab more gamelogs
+append_game_logs <- function(conn, season){
+  message(paste("Working on", season, "season..."))
+  one_season <- retrosheet_gamelog(season)
+  conn |>
+    dbWriteTable(
+      name = "gamelogs", value = one_season, append = TRUE
+    )
+}
+# Remove previous games, then fill table by iterating append_game_logs()
+dbSendQuery(con, "TRUNCATE TABLE gamelogs;")
+map(1995:2024, append_game_logs, conn = con)
+# Check gamelogs
+gamelogs %>%
+  group_by(year = str_sub(as.character(Date), 1, 4)) %>%
+  summarise(num_games = n()) %>%
+  arrange(year)
