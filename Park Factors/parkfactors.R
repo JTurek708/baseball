@@ -91,7 +91,7 @@ append_game_logs <- function(conn, season){
 }
 # Remove previous games, then fill table by iterating append_game_logs()
 dbSendQuery(con, "TRUNCATE TABLE gamelogs;")
-map(1995:2024, append_game_logs, conn = con)
+map(1981:2024, append_game_logs, conn = con)
 # Check gamelogs
 gamelogs %>%
   group_by(year = str_sub(as.character(Date), 1, 4)) %>%
