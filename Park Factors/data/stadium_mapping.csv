@@ -1,0 +1,528 @@
+﻿ParkID,State,City,Park Name,First,Last
+AXC01,Alabama,Alexander City,(unknown),1948,1949
+ANN01,Alabama,Anniston,(unknown),1940,1941
+BIR01,Alabama,Birmingham,Rickwood Field,1927,2024
+DCA01,Alabama,Decatur,Legion Field,1949,1949
+DOT01,Alabama,Dothan,Wiregrass Stadium,1948,1948
+GAD01,Alabama,Gadsden,(unknown),1940,1946
+HUN01,Alabama,Huntsville,Lincoln Park,1946,1948
+LEE01,Alabama,Leeds,(unknown),1938,1938
+MOB01,Alabama,Mobile,(unknown),1949,1949
+MTG01,Alabama,Montgomery,Cramton Bowl,1939,1949
+OZA01,Alabama,Ozark,(unknown),1949,1949
+SEL01,Alabama,Selma,Rowell Field,1939,1939
+TUS01,Alabama,Tuscaloosa,Alberta Park,1948,1949
+,,,,,
+PHO01,Arizona,Phoenix,Chase Field,1998,2024
+,,,,,
+ELD01,Arkansas,El Dorado,(unknown),1940,1940
+FTS01,Arkansas,Fort Smith,(unknown),1948,1948
+HEL01,Arkansas,Helena,(unknown),1949,1949
+HSP01,Arkansas,Hot Springs,(unknown),1949,1949
+JON01,Arkansas,Jonesboro,(unknown),1941,1949
+LRK01,Arkansas,Little Rock,Crump Park,1938,1939
+LRK02,Arkansas,Little Rock,Travelers Field,1938,1949
+MRA01,Arkansas,Marianna,(unknown),1938,1938
+PBL01,Arkansas,Pine Bluff,(unknown),1940,1942
+,,,,,
+ANA01,California,Anaheim,Angel (Anaheim) Stadium,1966,2024
+BAK01,California,Bakersfield,Sam Lynn Park,1946,1946
+LGB01,California,Long Beach,Recreation Park,1943,1943
+LOS03,California,Los Angeles,Dodger Stadium,1962,2024
+LOS04,California,Los Angeles,Gilmore Field,1939,1943
+LOS01,California,Los Angeles,Memorial Coliseum,1958,1961
+LOS05,California,Los Angeles,White Sox Park,1925,1944
+LOS02,California,Los Angeles,Wrigley Field,1930,1961
+OAK01,California,Oakland,Oakland-Alameda Coliseum,1968,2024
+OAK02,California,Oakland,Oaks Park,1947,1947
+SAN03,California,San Diego,Lane Field,1942,1948
+SAN02,California,San Diego,Petco Park,2004,2024
+SAN01,California,San Diego,Qualcomm Stadium,1969,2003
+SFO02,California,San Francisco,Candlestick Park,1960,1999
+SFO03,California,San Francisco,Oracle Park,2000,2024
+SFO01,California,San Francisco,Seals Stadium,1944,1959
+,,,,,
+DEN02,Colorado,Denver,Coors Field,1995,2024
+DEN03,Colorado,Denver,Merchants Park,1936,1948
+DEN01,Colorado,Denver,Mile High Stadium,1993,1994
+,,,,,
+BRI01,Connecticut,Bridgeport,Candlelite Stadium,1940,1949
+HAR02,Connecticut,Hartford,Bulkeley Stadium,1940,1942
+STA01,Connecticut,Stamford,Mitchell Field,1947,1947
+,,,,,
+WIL03,Delaware,Wilmington,Harlan Field,1921,1926
+WIL08,Delaware,Wilmington,Pennsy Field,1939,1939
+WIL04,Delaware,Wilmington,Wilmington Park,1937,1949
+,,,,,
+WAS07,D.C.,Washington,American League Park I,1901,1903
+WAS08,D.C.,Washington,American League Park II,1904,1910
+WAS09,D.C.,Washington,Griffith Stadium,1911,1961
+WAS11,D.C.,Washington,Nationals Park,2008,2024
+WAS10,D.C.,Washington,RFK Stadium,1962,2007
+,,,,,
+DTB01,Florida,Daytona Beach,Cypress Street Park,1938,1938
+DUN01,Florida,Dunedin,TD Ballpark,2021,2021
+JKV01,Florida,Jacksonville,Red Cap Stadium,1937,1941
+LBV01,Florida,Lake Buena Vista,Disney Ballpark,2007,2008
+MIA02,Florida,Miami,Marlins Park,2012,2024
+MIA01,Florida,Miami,Sun Life Stadium,1993,2011
+ORL01,Florida,Orlando,(unknown),1939,1941
+PAL01,Florida,Palatka,(unknown),1939,1939
+STP01,Florida,St. Petersburg,Tropicana Field,1998,2024
+TAM01,Florida,Tampa,Plant Field,1941,1941
+,,,,,
+ALB03,Georgia,Albany,(unknown),1937,1937
+ATL01,Georgia,Atlanta,Atlanta-Fulton County,1966,1996
+ATL06,Georgia,Atlanta,Booker T. Washington,1938,1938
+ATL05,Georgia,Atlanta,Harper Field,1940,1946
+ATL04,Georgia,Atlanta,Ponce de Leon Park,1937,1949
+ATL03,Georgia,Atlanta,Truist Park,2017,2024
+ATL02,Georgia,Atlanta,Turner Field,1997,2016
+COL06,Georgia,Columbus,Golden Park,1949,1949
+ELB01,Georgia,Elberton,(unknown),1938,1938
+GRI01,Georgia,Griffin,(unknown),1939,1939
+MAC01,Georgia,Macon,Luther Williams Park,1938,1941
+,,,,,
+HON01,Hawai'i,Honolulu,Aloha Stadium,1997,1997
+,,,,,
+BEL01,Illinois,Belleville,Athletic Field,1937,1949
+CAI01,Illinois,Cairo,(unknown),1939,1949
+CAN04,Illinois,Canton,(unknown),1943,1943
+CEN01,Illinois,Centralia,Fans Field,1948,1949
+CHI10,Illinois,Chicago,Comiskey Park I,1910,1990
+CHI12,Illinois,Chicago,Guaranteed Rate Field,1991,2024
+CHI15,Illinois,Chicago,Mills Stadium,1934,1934
+CHI16,Illinois,Chicago,Shrewbridge Field,1938,1938
+CHI09,Illinois,Chicago,South Side Park III,1901,1940
+CHI08,Illinois,Chicago,West Side Grounds,1901,1915
+CHI11,Illinois,Chicago,Wrigley Field,1914,2024
+DAN01,Illinois,Danville,Garfield Stadium,1941,1949
+DCT02,Illinois,Decatur,Fans Field,1937,1949
+DCT01,Illinois,Decatur,Staley Field,1921,1921
+GLK01,Illinois,Great Lakes,Naval Training,1943,1943
+KEW01,Illinois,Kewanee,Northeast Park,1943,1943
+LSL01,Illinois,LaSalle,(unknown),1944,1944
+MAT01,Illinois,Mattoon,Indians Park,1949,1949
+MET01,Illinois,Metropolis,(unknown),1939,1939
+MOU01,Illinois,Mounds,(unknown),1938,1939
+MTV01,Illinois,Mt. Vernon,Veterans Park,1949,1949
+PEO01,Illinois,Peoria,(unknown),1937,1937
+PER01,Illinois,Peru,Washington Park,1941,1943
+RCK02,Illinois,Rockford,Rox Park,1949,1949
+SPA01,Illinois,Sparta,(unknown),1940,1940
+SPR07,Illinois,Springfield,Fitzpatrick Stadium,1949,1949
+SPR03,Illinois,Springfield,Lanphier Park,1939,1948
+SPR02,Illinois,Springfield,Reservoir Park,1929,1929
+URB01,Illinois,Urbana,Illinois Field,1945,1945
+WFI01,Illinois,West Frankfort,Memorial Stadium,1948,1949
+,,,,,
+EVA01,Indiana,Evansville,Bosse Field,1939,1939
+FOR05,Indiana,Fort Wayne,Dwenger Park,1944,1944
+FOR03,Indiana,Fort Wayne,Jailhouse Flats,1902,1902
+FOR04,Indiana,Fort Wayne,State School Diamond,1940,1943
+GAR01,Indiana,Gary,(unknown),1939,1939
+HAM01,Indiana,Hammond,Turner Field,1941,1944
+IND07,Indiana,Indianapolis,Federal League Park,1914,1914
+IND09,Indiana,Indianapolis,Northwestern Park,1915,1915
+IND10,Indiana,Indianapolis,Victory Field,1937,1949
+IND11,Indiana,Indianapolis,Washington Park,1921,1921
+KOK01,Indiana,Kokomo,Athletic Park,1922,1922
+KOK02,Indiana,Kokomo,Highland Park,1943,1949
+MUN02,Indiana,Muncie,McCullough Park,1942,1949
+RCI01,Indiana,Richmond,Municipal Stadium,1942,1949
+SBD01,Indiana,South Bend,Lippincott Park,1937,1946
+TER01,Indiana,Terre Haute,(unknown),1941,1944
+,,,,,
+CED01,Iowa,Cedar Rapid,Hill Park,1937,1949
+CBI01,Iowa,Council Bluffs,American Legion Park,1946,1948
+DAV02,Iowa,Davenport,Milan Park,1947,1947
+DAV01,Iowa,Davenport,Municipal Stadium,1936,1949
+DES01,Iowa,Des Moines,League Park,1936,1940
+DES02,Iowa,Des Moines,Pioneer Memorial Park,1947,1949
+DYE01,Iowa,Dyersville,Field of Dreams,2021,2022
+FDI01,Iowa,Fort Dodge,(unknown),1948,1948
+SCI01,Iowa,Sioux City,Soos Park,1947,1949
+SCI02,Iowa,Sioux City,Yards Park,1939,1939
+,,,,,
+ATC01,Kansas,Atchison,(unknown),1949,1949
+CHN01,Kansas,Chanute,(unknown),1937,1938
+JNC01,Kansas,Junction City,Rathert Field,1937,1941
+KCK01,Kansas,Kansas City,Ward Field,1938,1938
+MAN01,Kansas,Manhattan,Griffith Field,1937,1939
+MYV01,Kansas,Marysville,Marysville Ball Park,1937,1937
+PTK01,Kansas,Pittsburg,(unknown),1946,1949
+TOP01,Kansas,Topeka,Owl Park,1939,1942
+WIC01,Kansas,Wichita,Lawrence Field,1937,1949
+,,,,,
+COV02,Kentucky,Covington,Covington Park,1940,1940
+FUL01,Kentucky,Fulton,Fairfield Kitty League,1939,1939
+HOP01,Kentucky,Hopkinsville,(unknown),1943,1943
+LEX01,Kentucky,Lexington,Blue Grass Field,1948,1949
+LOU05,Kentucky,Louisville,Parkway Field,1937,1949
+OWE01,Kentucky,Owensboro,Miller Field,1940,1941
+,,,,,
+ALE01,Louisiana,Alexandria,(unknown),1937,1937
+BAT01,Louisiana,Baton Rouge,(unknown),1937,1949
+BOG01,Louisiana,Bogalusa,(unknown),1942,1942
+HML01,Louisiana,Hammond,(unknown),1941,1941
+HOU05,Louisiana,Houma,(unknown),1940,1940
+LKC01,Louisiana,Lake Charles,(unknown),1941,1941
+MNL01,Louisiana,Monroe,Casino Park,1937,1949
+NOL02,Louisiana,New Orleans,Lincoln Park,1937,1937
+NOL01,Louisiana,New Orleans,Pelican Stadium,1937,1949
+SHR01,Louisiana,Shreveport,Texas League Park,1941,1949
+TAL01,Louisiana,Tallulah,Fair Grounds Park,1937,1937
+,,,,,
+,,,,,
+,,,,,
+BAL14,Maryland,Baltimore,Bugle Field,1932,1949
+BAL13,Maryland,Baltimore,Maryland Park,1924,1931
+BAL11,Maryland,Baltimore,Memorial Stadium,1954,1991
+BAL12,Maryland,Baltimore,Camden Yards,1992,2024
+BAL09,Maryland,Baltimore,Oriole Park IV,1901,1940
+BAL10,Maryland,Baltimore,Terrapin Park,1914,1942
+CAM03,Maryland,Cambridge,(unknown),1940,1940
+CUM01,Maryland,Cumberland,(unknown),1937,1938
+EAS01,Maryland,Easton,Federal Park,1939,1939
+HAG01,Maryland,Hagerstown,Municipal Stadium,1946,1946
+NOR04,Maryland,Norbeck,Norbeck Park,1941,1941
+SBY01,Maryland,Salisbury,Memorial Field,1939,1946
+,,,,,
+BOS08,Massachusetts,Boston,Braves Field,1915,1952
+BOS07,Massachusetts,Boston,Fenway Park,1912,2024
+BOS06,Massachusetts,Boston,Huntington Avenue,1901,1911
+BOS05,Massachusetts,Boston,South End Grounds III,1901,1914
+SPR06,Massachusetts,Springfield,Pynchon Park,1940,1940
+,,,,,
+BCK01,Michigan,Battle Creek,Bailey Park,1949,1949
+BHM01,Michigan,Benton Harbor,Colony Park,1947,1947
+DET02,Michigan,Detroit,Bennett Park,1901,1911
+DET03,Michigan,Detroit,Burns Park,1901,1902
+DET05,Michigan,Detroit,Comerica Park,2000,2024
+DET08,Michigan,Detroit,Dequindre Park,1948,1948
+DET06,Michigan,Detroit,Hamtramck Stadium,1930,1937
+DET07,Michigan,Detroit,Mack Park,1921,1928
+DET04,Michigan,Detroit,Tiger Stadium,1912,1999
+FLI01,Michigan,Flint,Atwood Stadium,1945,1947
+GRA02,Michigan,Grand Rapids,Bigelow Field,1942,1946
+GRA03,Michigan,Grand Rapids,Lamar Park,1944,1944
+GRA01,Michigan,Grand Rapids,Ramona Park,1903,1903
+,,,,,
+MIN02,Minnesota,Bloomington,Metropolitan Stadium,1961,1981
+MIN03,Minnesota,Minneapolis,HHH Metrodome,1982,2009
+MIN05,Minnesota,Minneapolis,Nicollet Park,1943,1943
+MIN04,Minnesota,Minneapolis,Target Field,2010,2024
+STC01,Minnesota,St. Cloud,Rox Park,1947,1947
+STP02,Minnesota,St. Paul,Lexington Park,1938,1949
+WIN02,Minnesota,Winona,Gabrych Park,1949,1949
+,,,,,
+CLA01,Mississippi,Clarksdale,(unknown),1938,1948
+COL07,Mississippi,Columbus,(unknown),1949,1949
+GRE01,Mississippi,Greenville,Sportsmans Park,1939,1949
+GRE02,Mississippi,Greenwood,(unknown),1948,1949
+JAC01,Mississippi,Jackson,League Park,1937,1949
+TUP01,Mississippi,Tupelo,(unknown),1949,1949
+VCK01,Mississippi,Vicksburg,(unknown),1949,1949
+,,,,,
+CLC01,Missouri,Chillicothe,Simpson Park,1949,1949
+CMB01,Missouri,Columbia,(unknown),1937,1937
+HAN01,Missouri,Hannibal,(unknown),1949,1949
+JOP01,Missouri,Joplin,Childress Field,1933,1933
+KAN02,Missouri,Kansas City,Association Park,1920,1921
+KAN04,Missouri,Kansas City,Gordon and Koppel Field,1914,1915
+KAN06,Missouri,Kansas City,Kauffman Stadium,1973,2024
+KAN05,Missouri,Kansas City,Municipal Stadium,1923,1972
+SPR05,Missouri,Springfield,White City Park,1937,1941
+STJ01,Missouri,St. Joseph,City Stadium,1939,1949
+STL09,Missouri,St. Louis,Busch Stadium II,1966,2005
+STL10,Missouri,St. Louis,Busch Stadium III,2006,2024
+STL11,Missouri,St. Louis,Giants Park,1920,1921
+STL08,Missouri,St. Louis,Handlan's Park,1914,1915
+STL13,Missouri,St. Louis,National Park,1939,1939
+STL05,Missouri,St. Louis,Robison Field,1901,1920
+STL06,Missouri,St. Louis,Sportsman's Park II,1902,1908
+STL07,Missouri,St. Louis,Sportsman's Park III,1909,1966
+STL12,Missouri,St. Louis,Stars Park,1925,1937
+UNI02,Missouri,Unionville,(unknown),1937,1937
+,,,,,
+ARN01,Nebraska,Arlington,Fairgrounds Park,1947,1949
+BEA03,Nebraska,Beatrice,Athletic Park,1949,1949
+FLC01,Nebraska,Falls City,City Park,1949,1949
+GIN01,Nebraska,Grand Island,Municipal Ballpark,1949,1949
+HAS01,Nebraska,Hastings,Duncan Field,1949,1949
+KEA01,Nebraska,Kearney,Memorial Diamond,1949,1949
+LIN02,Nebraska,Lincoln,Landis Yard,1939,1939
+LIN01,Nebraska,Lincoln,Sherman Field,1938,1947
+NFN01,Nebraska,Norfolk,Athletic Park,1947,1947
+OMA02,Nebraska,Omaha,League Park,1933,1933
+OMA03,Nebraska,Omaha,Omaha Municipal Stadium,1949,1949
+OMA01,Nebraska,Omaha,TD Ameritrade Park,2019,2019
+OXF01,Nebraska,Oxford,Rodeo Grounds,1946,1949
+SUP01,Nebraska,Superior,Lincoln Park Field,1949,1949
+WYM01,Nebraska,Wymore,Arbor State Park,1949,1949
+,,,,,
+LAS01,Nevada,Las Vegas,Cashman Field,1996,1996
+,,,,,
+ACY01,New Jersey,Atlantic City,Inlet Park,1904,1927
+ACY02,New Jersey,Atlantic City,New York Avenue Field,1940,1948
+BEL02,New Jersey,Belmar,Belmar Memorial Field,1937,1942
+BRA01,New Jersey,Bradley Beach,Bradley Beach Field,1926,1926
+CAM01,New Jersey,Camden,3rd St. & Erie Ave,1921,1921
+CAM02,New Jersey,Camden,Twelfth and Federal St,1903,1942
+FAI01,New Jersey,Fairview,Fairview Park,1931,1931
+HAR01,New Jersey,Harrison,Harrison Field,1915,1915
+JER02,New Jersey,Jersey City,Roosevelt Stadium,1941,1957
+MTH01,New Jersey,Mt. Holly,(unknown),1928,1928
+NWK04,New Jersey,Newark,Ruppert Stadium,1937,1949
+NWK01,New Jersey,Newark,Wiedenmeyer's Park,1904,1904
+PAR01,New Jersey,Parlin,(unknown),1937,1937
+PAT01,New Jersey,Patterson,Hinchliffe Stadium,1937,1943
+RED01,New Jersey,Red Bank,Pirates Park,1938,1941
+TRE01,New Jersey,Trenton,Dunn Field,1937,1949
+TRE02,New Jersey,Trenton,YMCA Field,1903,1903
+WNY02,New Jersey,West New York,Miller Stadium,1937,1937
+WNY01,New Jersey,West New York,Field Club Grounds,1937,1937
+,,,,,
+ALB02,New York,Albany,Hawkins Stadium,1940,1948
+BEL03,New York,Belmont,(unknown),1941,1941
+NYC23,New York,Brooklyn,Dexter Park,1934,1947
+NYC15,New York,Brooklyn,Ebbets Field,1913,1957
+NYC28,New York,Brooklyn,Erasmus Field,1937,1940
+NYC12,New York,Brooklyn,Washington Park III,1901,1912
+NYC19,New York,Brooklyn,Washington Park IV,1914,1915
+BUF04,New York,Buffalo,Intl Fair Assoc Grounds,1914,1915
+BUF06,New York,Buffalo,Offermann Stadium,1937,1949
+BUF05,New York,Buffalo,Sahlen Field,2020,2021
+FRE01,New York,Freeport,Freeport Stadium,1937,1937
+JAM01,New York,Jamestown,Celoron Baseball Park,1927,1927
+LIC01,New York,Long Island,Recreation Park,1937,1937
+MID04,New York,Middletown,State Hospital Field,1939,1939
+NYC24,New York,New York,Catholic Protectory Oval,1925,1929
+NYC20,New York,New York,Citi Field,2009,2024
+NYC25,New York,New York,Dyckman Oval,1935,1937
+NYC13,New York,New York,Hilltop Park,1903,1912
+NYC10,New York,New York,Polo Grounds IV,1901,1910
+NYC14,New York,New York,Polo Grounds V,1911,1963
+NYC29,New York,New York,Randalls Island,1938,1938
+NYC17,New York,New York,Shea Stadium,1964,2008
+NYC16,New York,New York,Yankee Stadium I,1923,2008
+NYC21,New York,New York,Yankee Stadium II,2009,2024
+NYC22,New York,New York City,Olympic Field,1913,1913
+NBG01,New York,Newburgh,(unknown),1936,1936
+NIA01,New York,Niagara Falls,Hyde Park Stadium,1942,1949
+OLE01,New York,Olean,Bradner Stadium,1938,1942
+PGK01,New York,Poughkeepsie,Riverview Field,1937,1937
+NYC18,New York,Queens,Wallace's Ridgewood Park,1903,1903
+ROC04,New York,Rochester,Red Wing Stadium,1938,1948
+PTR01,New York,Staten Island,Port Richmond,1941,1941
+SYR04,New York,Syracuse,MacArthur Stadium,1938,1949
+,,,,,
+CHA03,North Carolin,Charlotte,Griffith Park,1939,1949
+DUR01,North Carolin,Durham,Durham Athletic Field,1940,1940
+FTB01,North Carolin,Fort Bragg,Fort Bragg Field,2016,2016
+GOL01,North Carolin,Goldsboro,(unknown),1940,1940
+GRE03,North Carolin,Greensboro,Memorial Stadium,1944,1946
+RAL01,North Carolin,Raleigh,Chavis Park,1940,1942
+RKM01,North Carolin,Rocky Mount,Talbert Park,1948,1948
+WIL06,North Carolin,Wilmington,Legion Stadium,1942,1942
+WIL07,North Carolin,Wilson,Municipal Stadium,1939,1940
+WSL01,North Carolin,Winston-Salem,Soutside Park,1939,1939
+,,,,,
+BIS01,North Dakota,Bismarck,Municipal Ballpark,1938,1939
+FAR01,North Dakota,Fargo,Barnett Field,1938,1941
+GRA04,North Dakota,Grafton,(unknown),1938,1938
+WAH01,North Dakota,Wahpeton,(unknown),1941,1941
+,,,,,
+AKR01,Ohio,Akron,League Park,1930,1945
+CAN03,Ohio,Canton,Lakeside Park,1938,1943
+CAN01,Ohio,Canton,Mahaffey Park,1902,1903
+CIN02,Ohio,Cincinnati,Avenue Grounds,1949,1949
+CIN08,Ohio,Cincinnati,Cinergy Field,1970,2002
+CIN07,Ohio,Cincinnati,Crosley Field,1912,1970
+CIN09,Ohio,Cincinnati,Great American Ballpark,2003,2024
+CIN05,Ohio,Cincinnati,League Park II,1901,1901
+CIN06,Ohio,Cincinnati,Palace of the Fans,1902,1911
+CLE07,Ohio,Cleveland,Cleveland Stadium,1931,1993
+CLE11,Ohio,Cleveland,Kinsman Hardware Field,1931,1931
+CLE05,Ohio,Cleveland,League Park III,1901,1909
+CLE06,Ohio,Cleveland,League Park IV,1910,1949
+CLE08,Ohio,Cleveland,Progressive Field,1994,2024
+COL03,Ohio,Columbus,Neil Park I,1902,1903
+COL04,Ohio,Columbus,Neil Park II,1905,1928
+COL05,Ohio,Columbus,Red Bird Stadium,1937,1949
+DAY01,Ohio,Dayton,Fairview Park,1902,1902
+DAY03,Ohio,Dayton,Hudson Field,1935,1949
+DEF01,Ohio,Defiance,Kingsbury Park,1942,1942
+FIN01,Ohio,Findlay,Ohio State League Park,1942,1942
+LIM01,Ohio,Lima,Halloran Park,1939,1948
+MID02,Ohio,Middletown,(unknown),1937,1945
+NWO01,Ohio,Newark,Arnold Park,1948,1949
+NCO01,Ohio,North Canton,Memorial Stadium,1949,1949
+NOR03,Ohio,Norwalk,Keller Field,1939,1944
+PAI01,Ohio,Painesville,(unknown),1939,1939
+POR02,Ohio,Portsmouth,Riverside Park,1940,1941
+SPR04,Ohio,Springfield,Municipal Stadium,1937,1949
+STM01,Ohio,St. Marys,(unknown),1945,1945
+TOL04,Ohio,Toledo,Armory Park,1903,1903
+TOL05,Ohio,Toledo,Swayne Field,1936,1948
+WAR02,Ohio,Warren,Fairgrounds Park,1940,1940
+YOU01,Ohio,Youngtown,Idora Park,1926,1948
+ZAN01,Ohio,Zanesville,Mark Park,1938,1938
+ZAN02,Ohio,Zanesville,Municipal Stadium,1941,1949
+,,,,,
+MUS01,Oklahoma,Muskogee,Athletic Park,1939,1949
+OKC01,Oklahoma,Oklahoma City,Holland Field,1933,1942
+OKC02,Oklahoma,Oklahoma City,Texas League Park,1941,1949
+SHW01,Oklahoma,Shawnee,Athletic Park,1940,1940
+TUL01,Oklahoma,Tulsa,Texas League Park,1939,1949
+,,,,,
+ALT01,Pennsylvania,Altoona,Columbia Park,1937,1945
+ALT02,Pennsylvania,Altoona,Cricket Field,1932,1948
+BAN01,Pennsylvania,Bangor,(unknown),1948,1948
+BEA02,Pennsylvania,Beaver Falls,(unknown),1941,1941
+BLO01,Pennsylvania,Bloomsburg,Bloomsburg Fair Grounds,1926,1926
+BUT01,Pennsylvania,Butler,(unknown),1928,1942
+CHA02,Pennsylvania,Chambersburg,Henninger Field,1937,1942
+CHE02,Pennsylvania,Chester,Elks Park,1937,1938
+CHE01,Pennsylvania,Chester,Lloyd Field,1938,1949
+DAR01,Pennsylvania,Darby,Hilldale Park,1921,1931
+ERI01,Pennsylvania,Erie,Ainsworth Field,1942,1947
+GRE04,Pennsylvania,Greensburg,Offutt Field,1938,1939
+HRB01,Pennsylvania,Harrisburg,Island Park,1903,1948
+HOM01,Pennsylvania,Homestead,Municipal Field,1939,1939
+HOP02,Pennsylvania,Hopewell,(unknown),1937,1937
+JOH01,Pennsylvania,Johnstown,Point Grounds,1927,1940
+KNP01,Pennsylvania,Kane,Glenwood Field,1941,1941
+LAN01,Pennsylvania,Lancaster,Stumpf Field,1938,1946
+MCK01,Pennsylvania,McKeesport,(unknown),1938,1941
+MEA01,Pennsylvania,Meadville,(unknown),1942,1947
+MID03,Pennsylvania,Middletown,Grandview Park Field,1937,1938
+MSN01,Pennsylvania,Monessen,Tin Plate Field,1938,1940
+MNH01,Pennsylvania,Munhall,West Field,1948,1948
+NWC01,Pennsylvania,New Castle,P.J. Flaherty Memorial,1948,1949
+NBE01,Pennsylvania,North Bethlehem,(unknown),1948,1948
+OIL01,Pennsylvania,Oil City,Ramage-Hasson Field,1942,1943
+PHI17,Pennsylvania,Philadelphia,44th and Parkside,1935,1947
+PHI09,Pennsylvania,Philadelphia,Baker Bowl,1901,1938
+PHI19,Pennsylvania,Philadelphia,Bigler Park,1930,1930
+PHI13,Pennsylvania,Philadelphia,Citizens Bank Park,2004,2024
+PHI10,Pennsylvania,Philadelphia,Columbia Park,1901,1908
+PHI16,Pennsylvania,Philadelphia,Passon Park,1934,1938
+PHI11,Pennsylvania,Philadelphia,Shibe Park,1909,1970
+PHI12,Pennsylvania,Philadelphia,Veterans Stadium,1971,2003
+PPB01,Pennsylvania,Philipsburgh,(unknown),1928,1938
+PIT05,Pennsylvania,Pittsburgh,Exposition Park III,1901,1915
+PIT06,Pennsylvania,Pittsburgh,Forbes Field,1909,1970
+PIT09,Pennsylvania,Pittsburgh,Greenlee Field,1932,1938
+PIT08,Pennsylvania,Pittsburgh,PNC Park,2001,2024
+PIT07,Pennsylvania,Pittsburgh,Three Rivers Stadium,1970,2000
+SCR01,Pennsylvania,Scranton,Dunmore Stadium,1942,1942
+SHA01,Pennsylvania,Sharon,Sharon Park,1928,1928
+SCP01,Pennsylvania,State College,Bellefonte Community,1938,1938
+SUN01,Pennsylvania,Sunbury,Memorial Park,1947,1947
+UNI01,Pennsylvania,Uniontown,Elks Park,1927,1947
+VAN01,Pennsylvania,Vandergrift,(unknown),1948,1948
+WAR03,Pennsylvania,Warren,Russell Field,1939,1940
+WAP01,Pennsylvania,Washington,Wash-High Fied,1941,1944
+YOR03,Pennsylvania,West York,Martin-Perry Field,1937,1945
+WIL05,Pennsylvania,Williamsport,(unknown),1943,1943
+WIL02,Pennsylvania,Williamsport,Bowman Field,2017,2024
+YOR01,Pennsylvania,York,Eagles Park,1932,1935
+YOR02,Pennsylvania,York,Memorial Stadium,1946,1948
+,,,,,
+SJU01,Puerto Rico,San Juan,Estadio Hiram Bithorn,2001,2018
+,,,,,
+WAR01,Rhode Island,Warwick,Rocky Point Park,1903,1903
+,,,,,
+CHT01,Tennessee,Chattanooga,Engel Stadium,1937,1949
+JAC02,Tennessee,Jackson,Lakeview Park,1938,1949
+KNO01,Tennessee,Knoxville,Caswell Park,1944,1948
+MEM01,Tennessee,Memphis,Lewis Athletic Park,1925,1925
+MEM02,Tennessee,Memphis,Martin Stadium,1937,1949
+MEM03,Tennessee,Memphis,Russwood Park,1935,1946
+NSH02,Tennessee,Nashville,Sulphur Dell,1932,1949
+NSH01,Tennessee,Nashville,Tom Wilson Park,1949,1949
+,,,,,
+ARL01,Texas,Arlington,Arlington Stadium,1972,1993
+ARL03,Texas,Arlington,Globe Life Field,2020,2024
+ARL02,Texas,Arlington,Rangers Ballpark,1994,2019
+AUS01,Texas,Austin,Disch Field,1947,1949
+BEA01,Texas,Beaumont,Stuart Stadium,1944,1949
+COR01,Texas,Corpus Christi,Firemens Ball Park,1946,1946
+DAL02,Texas,Dallas,Burnett Field,1938,1949
+DAL01,Texas,Dallas,Rebel Stadium,1939,1948
+FTW01,Texas,Fort Worth,La Grave Field,1940,1948
+GAL01,Texas,Galveston,Moody Stadium,1937,1940
+HOU02,Texas,Houston,Astrodome,1965,1999
+HOU04,Texas,Houston,Buffalo Stadium,1938,1949
+HOU01,Texas,Houston,Colt Stadium,1962,1964
+HOU03,Texas,Houston,Minute Maid Park,2000,2024
+HOU06,Texas,Houston,West End Park,1937,1937
+MRT01,Texas,Marshall,Matthewson Park,1938,1939
+PTX01,Texas,Paris,Binnion Park,1941,1946
+PTA01,Texas,Port Arthur,Legion Park,1940,1942
+SAT01,Texas,San Antonio,Mission Stadium,1944,1949
+TEX01,Texas,Texarkana,(unknown),1938,1939
+WAC01,Texas,Waco,Katy Park,1938,1949
+WFL01,Texas,Wichita Falls,Spudder Field,1941,1949
+,,,,,
+DAN02,Virginia,Danville,Peters Park,1945,1947
+NPN01,Virginia,Newport News,Builders Stadium,1941,1947
+NPN02,Virginia,Newport News,Pensinsula War Memorial,1949,1949
+NOR05,Virginia,Norfolk,Bain Field,1939,1939
+NOR01,Virginia,Norfolk,High Rock Park,1943,1947
+NOR02,Virginia,Norfolk,Tar Park,1940,1949
+PET01,Virginia,Petersburg,(unknown),1949,1949
+POR01,Virginia,Portsmouth,City Stadium,1940,1949
+RIC05,Virginia,Richmond,Mayo Island,1939,1939
+RIC04,Virginia,Richmond,Mooers Field,1941,1947
+RIC03,Virginia,Richmond,Tate Field,1927,1947
+,,,,,
+SEA02,Washington,Seattle,Kingdome,1977,1999
+SEA03,Washington,Seattle,Safeco Field,1999,2024
+SEA01,Washington,Seattle,Sick's Stadium,1969,1969
+,,,,,
+BEC01,West Virginia,Beckley,RMI Park,1937,1938
+BLU01,West Virginia,Bluefield,Blakely Field,1938,1938
+CHA01,West Virginia,Charleston,Kanawha Park,1937,1949
+FMT01,West Virginia,Fairmont,(unknown),1928,1937
+HUN02,West Virginia,Huntington,(unknown),1942,1942
+WHE02,West Virginia,Wheeling,Holloway Memorial Park,1939,1939
+,,,,,
+APP01,Wisconsin,Appleton,Spencer Park,1943,1943
+EAU01,Wisconsin,Eau Claire,Carson Park,1940,1949
+GBW01,Wisconsin,Green Bay,Joannes Park,1945,1945
+LCR01,Wisconsin,LaCrosse,Copeland Park,1949,1949
+MIL03,Wisconsin,Milwaukee,Athletic Park,1937,1949
+MIL05,Wisconsin,Milwaukee,County Stadium,1953,2000
+MIL04,Wisconsin,Milwaukee,Lloyd Street Grounds,1901,1901
+MIL06,Wisconsin,Milwaukee,Miller Park,2001,2024
+OSH01,Wisconsin,Oshkosh,Municipal Athletic,1941,1941
+RAC01,Wisconsin,Racine,Horlick Field,1944,1945
+,,,,,
+SYD01,Australia,Sydney,Sydney Cricket Ground,2014,2014
+,,,,,
+,Canada,,,,
+BRA02,Manitoba,Brandon,(unknown),1938,1938
+PLP01,Manitoba,Portage La Prair,ie  Island Park,1938,1938
+WIN01,Manitoba,Winnipeg,Osborne Stadium,1935,1943
+,,,,,
+HAM02,Ontario,Hamilton,(unknown),1943,1944
+STC02,Ontario,St. Catherines,Sports Park,1948,1948
+TOR01,Ontario,Toronto,Exhibition Stadium,1977,1989
+TOR02,Ontario,Toronto,Rogers Centre,1989,2024
+,,,,,
+MON01,Quebec,Montreal,Parc Jarry,1969,1976
+MON02,Quebec,Montreal,Stade Olympique,1977,2004
+,,,,,
+REG01,Saskatchewan,Regina,Park de Young,1938,1939
+,,,,,
+LON01,England,London,London Stadium,2019,2024
+,,,,,
+TOK01,Japan,Tokyo,Tokyo Dome,2000,2019
+,,,,,
+MEX01,Mexico,Mexico City,(unknown),1935,1935
+MEX02,Mexico,Mexico City,Alfredo Harp Helu,2023,2024
+MNT01,Mexico,Monterrey,Estadio Monterrey,1996,2019
+,,,,,
+SEO01,South Korea,Seoul,Gocheok Sky Dome,2024,2024

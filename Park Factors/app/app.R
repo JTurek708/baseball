@@ -1,4 +1,4 @@
-### Cold vs Warm Weather Park Factors
+### Average Runs Scored Shiny App
 library(fs)
 library(abdwr3edata)
 library(tidyverse)
@@ -8,19 +8,7 @@ library(shiny)
 library(shinydashboard)
 library(rsconnect)
 
-# Query database - 2014 - 2024
-query <- "
-SELECT \"Date\", \"ParkID\", \"VisitingTeam\", \"HomeTeam\",
-       \"VisitorRunsScored\" AS awR, \"HomeRunsScore\" AS hmR
-FROM gamelogs
-WHERE  \"Date\" BETWEEN 20140101 AND 20241231;
-"
-
-# Create dataframe
-weather_runs_scored <- dbGetQuery(con, query)
-write.csv(weather_runs_scored, "weather_runs_scored.csv", row.names = FALSE)
-#View(weather_runs_scored)
-
+weather_runs_scored <- read.csv("weather_runs_scored.csv")
 # Convert and preprocess the data
 games <- weather_runs_scored %>%
   mutate(
