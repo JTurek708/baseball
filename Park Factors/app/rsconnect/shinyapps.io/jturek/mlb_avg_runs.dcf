@@ -1,0 +1,12 @@
+name: mlb_avg_runs
+title:
+username: jturek
+account: jturek
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13813521
+bundleId: 9706343
+url: https://jturek.shinyapps.io/mlb_avg_runs/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

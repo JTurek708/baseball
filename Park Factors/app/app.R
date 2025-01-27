@@ -9,6 +9,7 @@ library(shinydashboard)
 library(rsconnect)
 
 weather_runs_scored <- read.csv("weather_runs_scored.csv")
+team_mapping <- read.csv('team_mapping.csv')
 # Convert and preprocess the data
 games <- weather_runs_scored %>%
   mutate(
@@ -82,7 +83,7 @@ calculate_yearly_averages <- function(team, games_df) {
 
 # UI
 ui <- fluidPage(
-  titlePanel("MLB Run Scoring: Home vs. Other Stadiums (2014-2024)"),
+  titlePanel("MLB Run Scoring: Home vs. Away Stadiums (2014-2024)"),
   sidebarLayout(
     sidebarPanel(
       selectInput(
@@ -109,7 +110,7 @@ server <- function(input, output) {
     ggplot(team_data, aes(x = month_name, y = avg_runs, color = location, group = location)) +
       geom_line(size = 1.2) +
       labs(
-        title = paste("Average Runs Scoring: Home vs. Other Stadiums for", input$team),
+        title = paste("Average Runs Scoring: Home vs. Away Stadiums for", input$team),
         x = "Month",
         y = "Average Runs per Game",
         color = "Location"
@@ -147,7 +148,7 @@ server <- function(input, output) {
       geom_line(size = 1.2) +
       facet_wrap(~ year, ncol = 3) +  # Facet by year
       labs(
-        title = paste("Monthly Average Run Scoring: Home vs. Other Stadiums for", input$team),
+        title = paste("Monthly Average Run Scoring: Home vs. Away Stadiums for", input$team),
         x = "Month",
         y = "Average Runs per Game",
         color = "Location"
