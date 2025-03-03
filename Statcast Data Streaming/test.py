@@ -41,7 +41,7 @@ def run_pipeline():
     Run the entire pipeline: fetch data and load it into BigQuery.
     """
     # Replace with your BigQuery table identifier in the format: "project.dataset.table"
-    table_id = "your-project-id.your_dataset.your_table"
+    table_id = "baseball-450617.statcast_pitch_level"
     try:
         df = fetch_statcast_data_for_yesterday()
         load_data_to_bigquery(df, table_id)
