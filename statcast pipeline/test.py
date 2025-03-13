@@ -3,6 +3,8 @@ import pandas as pd
 from pybaseball import statcast
 from google.cloud import storage
 
+storage_client = storage.Client(project="Baseball")
+
 def run_pipeline_for_date(target_date: str, bucket_name: str):
     """
     Runs the pipeline for a given date.
