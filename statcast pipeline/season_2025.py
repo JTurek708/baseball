@@ -11,7 +11,7 @@ def run_pipeline_for_yesterday(bucket_name: str, master_filename: str = "master2
     print(f"Processing data for {formatted_date}...")
     
     # 2. Only process if yesterday is on/after the season start (March 18, 2025)
-    season_start = datetime(2025, 3, 18)
+    season_start = datetime(2025, 3, 17)
     if yesterday < season_start:
         print(f"Yesterday ({formatted_date}) is before season start ({season_start.strftime('%Y-%m-%d')}). Skipping.")
         return
