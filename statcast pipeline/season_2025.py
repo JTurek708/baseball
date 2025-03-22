@@ -5,7 +5,7 @@ from pybaseball import statcast
 from google.cloud import storage
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/jackturek/Documents/Repos/baseball/statcast pipeline/baseball-450617-d3588fea7841.json"
+
 
 
 def run_pipeline_for_yesterday(bucket_name: str, master_filename: str = "master2025.csv"):
