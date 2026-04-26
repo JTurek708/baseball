@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.data import get_pitcher_id, get_arsenal_data
-from utils.plots import plot_movement, plot_usage, plot_velo, plot_spin
+from utils.plots import plot_movement, plot_usage, plot_velo, plot_spin, plot_count_usage
 
 st.set_page_config(page_title="Pitch Arsenal Visualizer", layout="wide")
 
@@ -60,6 +60,8 @@ if st.session_state.data is not None:
         st.plotly_chart(plot_velo(df_filtered), use_container_width=True)
     with col4:
         st.plotly_chart(plot_spin(df_filtered), use_container_width=True)
+    st.markdown("---")
+    st.plotly_chart(plot_count_usage(df_filtered), use_container_width=True)  
 
 else:
     st.info("Search for a pitcher in the sidebar to get started.")

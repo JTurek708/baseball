@@ -17,6 +17,8 @@ PITCH_COLORS = {
 
 # Chart 1: Movement Profile
 def plot_movement(df):
+    from utils.data import get_whiff_rate
+
     summary = (
         df.groupby("pitch_label")
         .agg(
@@ -29,6 +31,13 @@ def plot_movement(df):
     summary["pfx_x_in"] = summary["pfx_x"] * 12
     summary["pfx_z_in"] = summary["pfx_z"] * 12
 
+    whiff_df = get_whiff_rate(df)
+    summary = summary.merge(whiff_df[["pitch_label", "whiff_rate"]], on="pitch_label", how="left")
+    summary["whiff_pct"] = (summary["whiff_rate"] * 100).round(1)
+    summary["label"] = summary.apply(
+        lambda r: f"{r['pitch_label']}<br>Whiff: {r['whiff_pct']}%", axis=1
+    )
+
     fig = px.scatter(
         summary,
         x="pfx_x_in",
@@ -37,17 +46,27 @@ def plot_movement(df):
         size="count",
         text="pitch_label",
         color_discrete_map=PITCH_COLORS,
+        custom_data=["whiff_pct", "count"],
         labels={
             "pfx_x_in": "Horizontal Break (in.)",
             "pfx_z_in": "Induced Vertical Break (in.)",
             "pitch_label": "Pitch",
-            "count": "# Thrown"
         },
         title="Pitch Movement Profile"
     )
     fig.add_hline(y=0, line_dash="dash", line_color="grey")
     fig.add_vline(x=0, line_dash="dash", line_color="grey")
-    fig.update_traces(textposition="top center")
+    fig.update_traces(
+        textposition="top center",
+        hovertemplate=(
+            "<b>%{text}</b><br>"
+            "H. Break: %{x:.1f} in.<br>"
+            "V. Break: %{y:.1f} in.<br>"
+            "Whiff Rate: %{customdata[0]}%<br>"
+            "# Thrown: %{customdata[1]}<br>"
+            "<extra></extra>"
+        )
+    )
     fig.update_layout(template="plotly_dark")
     return fig
 
@@ -123,4 +142,46 @@ def plot_spin(df):
         template="plotly_dark",
         showlegend=False
     )
+    return fig
+
+# Count-Leverage Breakdown
+def plot_count_usage(df):
+    count_cols = ["balls", "strikes"]
+    df_counts = df.dropna(subset=count_cols).copy()
+    df_counts["count"] = df_counts["balls"].astype(int).astype(str) + "-" + df_counts["strikes"].astype(int).astype(str)
+
+    COUNT_ORDER = ["0-0", "1-0", "2-0", "3-0", "0-1", "1-1", "2-1", "3-1", "0-2", "1-2", "2-2", "3-2"]
+    df_counts = df_counts[df_counts["count"].isin(COUNT_ORDER)]
+
+    usage = (
+        df_counts.groupby(["count", "pitch_label"])
+        .size()
+        .reset_index(name="n")
+    )
+    usage["pct"] = usage.groupby("count")["n"].transform(lambda x: x / x.sum())
+    usage["count"] = pd.Categorical(usage["count"], categories=COUNT_ORDER, ordered=True)
+    usage = usage.sort_values("count")
+    usage["pct_label"] = (usage["pct"] * 100).round(1).astype(str) + "%"
+
+    fig = px.bar(
+        usage,
+        x="count",
+        y="pct",
+        color="pitch_label",
+        color_discrete_map=PITCH_COLORS,
+        labels={
+            "count": "Count",
+            "pct": "Usage %",
+            "pitch_label": "Pitch"
+        },
+        title="Pitch Usage by Count",
+        text="pct_label"
+    )
+    fig.update_layout(
+        template="plotly_dark",
+        barmode="stack",
+        yaxis_tickformat=".0%",
+        legend_title="Pitch"
+    )
+    fig.update_traces(textposition="inside", textfont_size=10)
     return fig

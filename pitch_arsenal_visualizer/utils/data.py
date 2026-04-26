@@ -53,4 +53,22 @@ def get_arsenal_data(mlbam_id, season):
 
     return data
 
+# Whiff Rate
+def get_whiff_rate(df):
+    df = df.copy()
+    df["is_whiff"] = df["description"].isin([
+        "swinging_strike",
+        "swinging_strike_blocked",
+        "foul_tip"
+    ])
+    return (
+        df.groupby("pitch_label")
+        .agg(
+            whiffs=("is_whiff", "sum"),
+            swings=("is_whiff", "count")
+        )
+        .reset_index()
+        .assign(whiff_rate=lambda x: x["whiffs"] / x["swings"])
+    )
+
 
