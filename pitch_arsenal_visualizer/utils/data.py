@@ -71,4 +71,10 @@ def get_whiff_rate(df):
         .assign(whiff_rate=lambda x: x["whiffs"] / x["swings"])
     )
 
+def label_pitcher_data(df, name):
+    df = df.copy()
+    df["pitcher_name"] = name
+    return df
+
+
 

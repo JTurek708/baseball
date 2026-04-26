@@ -185,3 +185,71 @@ def plot_count_usage(df):
     )
     fig.update_traces(textposition="inside", textfont_size=10)
     return fig
+
+def plot_movement_comparison(df):
+    summary = (
+        df.groupby(["pitcher_name", "pitch_label"])
+        .agg(
+            pfx_x=("pfx_x", "mean"),
+            pfx_z=("pfx_z", "mean"),
+            count=("pitch_type", "count")
+        )
+        .reset_index()
+    )
+    summary["pfx_x_in"] = summary["pfx_x"] * 12
+    summary["pfx_z_in"] = summary["pfx_z"] * 12
+    summary["label"] = summary["pitcher_name"] + " — " + summary["pitch_label"]
+
+    fig = px.scatter(
+        summary,
+        x="pfx_x_in",
+        y="pfx_z_in",
+        color="pitcher_name",
+        symbol="pitch_label",
+        size="count",
+        text="pitch_label",
+        hover_data={"pitcher_name": True, "pitch_label": True, "count": True},
+        labels={
+            "pfx_x_in": "Horizontal Break (in.)",
+            "pfx_z_in": "Induced Vertical Break (in.)",
+            "pitcher_name": "Pitcher",
+            "pitch_label": "Pitch"
+        },
+        title="Movement Profile Comparison"
+    )
+    fig.add_hline(y=0, line_dash="dash", line_color="grey")
+    fig.add_vline(x=0, line_dash="dash", line_color="grey")
+    fig.update_traces(textposition="top center")
+    fig.update_layout(template="plotly_dark")
+    return fig
+
+def plot_usage_comparison(df):
+    usage = (
+        df.groupby(["pitcher_name", "pitch_label"])
+        .size()
+        .reset_index(name="n")
+    )
+    usage["pct"] = usage.groupby("pitcher_name")["n"].transform(lambda x: x / x.sum())
+
+    fig = px.bar(
+        usage,
+        x="pitcher_name",
+        y="pct",
+        color="pitch_label",
+        color_discrete_map=PITCH_COLORS,
+        barmode="group",
+        text=usage["pct"].map("{:.1%}".format),
+        labels={
+            "pitcher_name": "",
+            "pct": "Usage %",
+            "pitch_label": "Pitch"
+        },
+        title="Pitch Mix Comparison"
+    )
+    fig.update_layout(
+        template="plotly_dark",
+        yaxis_tickformat=".0%",
+        legend_title="Pitch"
+    )
+    fig.update_traces(textposition="outside", textfont_size=9)
+    return fig
