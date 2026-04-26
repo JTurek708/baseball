@@ -11,7 +11,7 @@ with st.sidebar:
     st.header("Search")
     first_name = st.text_input("First Name", placeholder="e.g. Paul")
     last_name  = st.text_input("Last Name",  placeholder="e.g. Skenes")
-    season     = st.selectbox("Season", options=list(range(2024, 2014, -1)))
+    season     = st.selectbox("Season", options=list(range(2026, 2014, -1)))
     search     = st.button("Load Arsenal", use_container_width=True)
 
 if "data" not in st.session_state:

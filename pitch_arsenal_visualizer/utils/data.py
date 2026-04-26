@@ -1,6 +1,20 @@
 import pybaseball
 import pandas as pd
 
+import streamlit as st
+
+@st.cache_data
+def get_arsenal_data(mlbam_id, season):
+    data = pybaseball.statcast_pitcher(
+        start_dt=f"{season}-03-01",
+        end_dt=f"{season}-11-01",
+        player_id=mlbam_id
+    )
+    data = data[data["pitch_type"].notna()]
+    data = data[~data["pitch_type"].isin(["IN", ""])]
+    data["pitch_label"] = data["pitch_type"].map(PITCH_LABELS).fillna(data["pitch_type"])
+    return data
+
 pybaseball.cache.enable()
 
 # Pitch labels
