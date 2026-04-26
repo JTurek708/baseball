@@ -24,7 +24,7 @@ if search:
         st.sidebar.error("Please enter both a first and last name.")
     else:
         with st.spinner(f"Loading {first_name} {last_name}'s {season} arsenal..."):
-            pitcher_id = get_pitcher_id(last_name, first_name)
+            pitcher_id = get_pitcher_id(last_name.strip(), first_name.strip())
             if pitcher_id is None:
                 st.sidebar.error("Pitcher not found. Check spelling and try again.")
             else:
