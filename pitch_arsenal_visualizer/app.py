@@ -7,6 +7,81 @@ from utils.plots import (
 )
 
 st.set_page_config(page_title="Pitch Arsenal Visualizer", layout="wide")
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&family=IBM+Plex+Mono&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Lora', Georgia, serif;
+        color: #2B2B2B;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-weight: 900 !important;
+        font-size: 3rem !important;
+        letter-spacing: -0.5px;
+        border-bottom: 3px double #2B2B2B;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem !important;
+    }
+
+    h2, h3 {
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-weight: 700 !important;
+        color: #2B2B2B;
+    }
+
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 24px;
+        border-bottom: 1px solid #C4B998;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #6B6B6B;
+    }
+
+    .stTabs [aria-selected="true"] {
+        color: #8B2C2C !important;
+        font-weight: 600;
+    }
+
+    .stButton > button {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        background-color: #8B2C2C;
+        color: #F5F1E8;
+        border: none;
+        border-radius: 0;
+        padding: 0.6rem 1rem;
+    }
+
+    .stButton > button:hover {
+        background-color: #6B1F1F;
+        color: #F5F1E8;
+    }
+
+    .block-container {
+        padding-top: 2rem;
+        max-width: 1300px;
+    }
+
+    section[data-testid="stSidebar"] {
+        border-right: 1px solid #C4B998;
+    }
+
+    .stAlert {
+        border-radius: 0;
+        border-left: 4px solid #8B2C2C;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 st.title("Pitch Arsenal Visualizer")
 st.markdown("Search any MLB pitcher to explore their pitch mix, movement, velocity, and spin.")
@@ -56,7 +131,12 @@ with tab1:
             )
 
         df_filtered = df[df["pitch_label"].isin(selected)]
-        st.subheader(f"{st.session_state.pitcher_name} — {season}")
+        st.markdown(
+            f"<h2 style='font-family:Playfair Display, Georgia, serif; font-style:italic; "
+            f"color:#6B6B6B; font-weight:500; margin-top:1.5rem;'>"
+            f"{st.session_state.pitcher_name} · {season}</h2>",
+            unsafe_allow_html=True
+)
 
         col1, col2 = st.columns([3, 2])
         with col1:

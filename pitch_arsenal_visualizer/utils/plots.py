@@ -15,6 +15,33 @@ PITCH_COLORS = {
     "Knuckleball":   "#777777",
 }
 
+# Editorial Layout
+EDITORIAL_LAYOUT = dict(
+    paper_bgcolor="#F5F1E8",
+    plot_bgcolor="#F5F1E8",
+    font=dict(family="Lora, Georgia, serif", color="#2B2B2B", size=13),
+    title=dict(
+        font=dict(family="Playfair Display, Georgia, serif", size=20, color="#2B2B2B"),
+        x=0,
+        xanchor="left"
+    ),
+    xaxis=dict(
+        gridcolor="#D9D2BC",
+        linecolor="#2B2B2B",
+        zerolinecolor="#2B2B2B"
+    ),
+    yaxis=dict(
+        gridcolor="#D9D2BC",
+        linecolor="#2B2B2B",
+        zerolinecolor="#2B2B2B"
+    ),
+    legend=dict(
+        font=dict(family="Lora, Georgia, serif", size=12),
+        bgcolor="rgba(0,0,0,0)"
+    ),
+    margin=dict(l=40, r=20, t=60, b=40)
+)
+
 # Chart 1: Movement Profile
 def plot_movement(df):
     from utils.data import get_whiff_rate
@@ -67,7 +94,7 @@ def plot_movement(df):
             "<extra></extra>"
         )
     )
-    fig.update_layout(template="plotly_dark")
+    fig.update_layout(**EDITORIAL_LAYOUT)
     return fig
 
 # Chart 2: Pitch Mix
@@ -139,7 +166,7 @@ def plot_spin(df):
         title="Spin Rate by Pitch Type"
     )
     fig.update_layout(
-        template="plotly_dark",
+        **EDITORIAL_LAYOUT,
         showlegend=False
     )
     return fig
@@ -178,7 +205,7 @@ def plot_count_usage(df):
         text="pct_label"
     )
     fig.update_layout(
-        template="plotly_dark",
+        **EDITORIAL_LAYOUT,
         barmode="stack",
         yaxis_tickformat=".0%",
         legend_title="Pitch"
@@ -220,7 +247,7 @@ def plot_movement_comparison(df):
     fig.add_hline(y=0, line_dash="dash", line_color="grey")
     fig.add_vline(x=0, line_dash="dash", line_color="grey")
     fig.update_traces(textposition="top center")
-    fig.update_layout(template="plotly_dark")
+    fig.update_layout(**EDITORIAL_LAYOUT)
     return fig
 
 def plot_usage_comparison(df):
@@ -247,7 +274,7 @@ def plot_usage_comparison(df):
         title="Pitch Mix Comparison"
     )
     fig.update_layout(
-        template="plotly_dark",
+        **EDITORIAL_LAYOUT,
         yaxis_tickformat=".0%",
         legend_title="Pitch"
     )
