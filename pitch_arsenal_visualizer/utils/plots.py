@@ -41,6 +41,21 @@ EDITORIAL_LAYOUT = dict(
     ),
     margin=dict(l=40, r=20, t=60, b=40)
 )
+# Pitcher Compare Colors
+PITCHER_COMPARE_COLORS = ["#8B2C2C", "#1F3A5F"]
+
+PITCH_SYMBOLS = {
+    "4-Seam FB":     "circle",
+    "Sinker":        "square",
+    "Cutter":        "diamond",
+    "Slider":        "triangle-up",
+    "Sweeper":       "triangle-down",
+    "Curveball":     "star",
+    "Knuckle-Curve": "star-triangle-up",
+    "Changeup":      "cross",
+    "Splitter":      "x",
+    "Knuckleball":   "hexagon",
+}
 
 # Chart 1: Movement Profile
 def plot_movement(df):
@@ -225,7 +240,6 @@ def plot_movement_comparison(df):
     )
     summary["pfx_x_in"] = summary["pfx_x"] * 12
     summary["pfx_z_in"] = summary["pfx_z"] * 12
-    summary["label"] = summary["pitcher_name"] + " — " + summary["pitch_label"]
 
     fig = px.scatter(
         summary,
@@ -235,7 +249,8 @@ def plot_movement_comparison(df):
         symbol="pitch_label",
         size="count",
         text="pitch_label",
-        hover_data={"pitcher_name": True, "pitch_label": True, "count": True},
+        color_discrete_sequence=PITCHER_COMPARE_COLORS,
+        symbol_map=PITCH_SYMBOLS,
         labels={
             "pfx_x_in": "Horizontal Break (in.)",
             "pfx_z_in": "Induced Vertical Break (in.)",
@@ -260,23 +275,23 @@ def plot_usage_comparison(df):
 
     fig = px.bar(
         usage,
-        x="pitcher_name",
+        x="pitch_label",
         y="pct",
-        color="pitch_label",
-        color_discrete_map=PITCH_COLORS,
+        color="pitcher_name",
         barmode="group",
+        color_discrete_sequence=PITCHER_COMPARE_COLORS,
         text=usage["pct"].map("{:.1%}".format),
         labels={
-            "pitcher_name": "",
+            "pitch_label": "",
             "pct": "Usage %",
-            "pitch_label": "Pitch"
+            "pitcher_name": "Pitcher"
         },
         title="Pitch Mix Comparison"
     )
     fig.update_layout(
         **EDITORIAL_LAYOUT,
         yaxis_tickformat=".0%",
-        legend_title="Pitch"
+        legend_title="Pitcher"
     )
-    fig.update_traces(textposition="outside", textfont_size=9)
+    fig.update_traces(textposition="outside", textfont_size=10)
     return fig
