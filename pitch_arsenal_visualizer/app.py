@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
-from utils.data import get_pitcher_id, get_arsenal_data, label_pitcher_data, get_arsenal_summary
+from utils.data import (
+    get_pitcher_id, get_arsenal_data, label_pitcher_data,
+    get_arsenal_summary, get_comparison_summary
+)
 from utils.plots import (
     plot_movement, plot_usage, plot_velo, plot_spin,
     plot_count_usage, plot_movement_comparison, plot_usage_comparison
@@ -225,10 +228,27 @@ with tab2:
     if st.session_state.compare_data is not None:
         df_compare = st.session_state.compare_data
 
+        st.markdown(
+            "<h3 style='font-family:Playfair Display, Georgia, serif; "
+            "font-style:italic; color:#6B6B6B; font-weight:500; "
+            "margin-top:1.5rem; margin-bottom:0.5rem;'>"
+            "Side by Side</h3>",
+            unsafe_allow_html=True
+        )
+
+        comparison_summary = get_comparison_summary(df_compare)
+
+        st.dataframe(
+            comparison_summary.style.format({
+                "Usage": "{:.1%}",
+                "Avg Velo": "{:.1f}",
+                "Avg Spin": "{:,.0f}",
+                "H. Break": "{:.1f}",
+                "V. Break": "{:.1f}",
+                "Whiff%": "{:.1%}"
+            }),
+            use_container_width=True,
+            hide_index=True
+        )
+
         col1, col2 = st.columns([3, 2])
-        with col1:
-            st.plotly_chart(plot_movement_comparison(df_compare), use_container_width=True, key="c_movement")
-        with col2:
-            st.plotly_chart(plot_usage_comparison(df_compare), use_container_width=True, key="c_usage")
-    else:
-        st.info("Enter two pitchers above and click Compare.")
