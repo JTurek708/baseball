@@ -252,3 +252,10 @@ with tab2:
         )
 
         col1, col2 = st.columns([3, 2])
+        with col1:
+            st.plotly_chart(plot_movement_comparison(df_compare), use_container_width=True, key="c_movement")
+        with col2:
+            st.plotly_chart(plot_usage_comparison(df_compare), use_container_width=True, key="c_usage")
+
+    else:
+        st.info("Enter two pitchers above and click Compare.")
