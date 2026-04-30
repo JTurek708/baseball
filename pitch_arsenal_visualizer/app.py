@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils.data import get_pitcher_id, get_arsenal_data, label_pitcher_data
+from utils.data import get_pitcher_id, get_arsenal_data, label_pitcher_data, get_arsenal_summary
 from utils.plots import (
     plot_movement, plot_usage, plot_velo, plot_spin,
     plot_count_usage, plot_movement_comparison, plot_usage_comparison
@@ -136,7 +136,35 @@ with tab1:
             f"color:#6B6B6B; font-weight:500; margin-top:1.5rem;'>"
             f"{st.session_state.pitcher_name} · {season}</h2>",
             unsafe_allow_html=True
-)
+        )
+
+        summary = get_arsenal_summary(df_filtered)
+
+        st.markdown(
+            "<h3 style='font-family:Playfair Display, Georgia, serif; "
+            "font-style:italic; color:#6B6B6B; font-weight:500; "
+            "margin-top:1.5rem; margin-bottom:0.5rem;'>"
+            "The Arsenal at a Glance</h3>",
+            unsafe_allow_html=True
+        )
+
+        st.dataframe(
+            summary.style.format({
+                "Usage": "{:.1%}",
+                "Avg Velo": "{:.1f}",
+                "Max Velo": "{:.1f}",
+                "Avg Spin": "{:,.0f}",
+                "H. Break": "{:.1f}",
+                "V. Break": "{:.1f}",
+                "Whiff%": "{:.1%}"
+            }),
+            use_container_width=True,
+            hide_index=True
+        )
+
+        col1, col2 = st.columns([3, 2])
+        with col1:
+            st.plotly_chart(plot_movement(df_filtered), use_container_width=True)
 
         col1, col2 = st.columns([3, 2])
         with col1:

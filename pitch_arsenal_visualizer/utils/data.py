@@ -76,5 +76,57 @@ def label_pitcher_data(df, name):
     df["pitcher_name"] = name
     return df
 
+def get_arsenal_summary(df):
+    df = df.copy()
+    df["is_whiff"] = df["description"].isin([
+        "swinging_strike",
+        "swinging_strike_blocked",
+        "foul_tip"
+    ])
+    df["is_swing"] = df["description"].isin([
+        "swinging_strike",
+        "swinging_strike_blocked",
+        "foul_tip",
+        "foul",
+        "hit_into_play"
+    ])
+
+    summary = (
+        df.groupby("pitch_label")
+        .agg(
+            count=("pitch_type", "count"),
+            avg_velo=("release_speed", "mean"),
+            max_velo=("release_speed", "max"),
+            avg_spin=("release_spin_rate", "mean"),
+            avg_hb=("pfx_x", "mean"),
+            avg_ivb=("pfx_z", "mean"),
+            swings=("is_swing", "sum"),
+            whiffs=("is_whiff", "sum"),
+        )
+        .reset_index()
+    )
+
+    summary["usage_pct"] = summary["count"] / summary["count"].sum()
+    summary["whiff_pct"] = summary["whiffs"] / summary["swings"].replace(0, 1)
+    summary["avg_hb"] = summary["avg_hb"] * 12
+    summary["avg_ivb"] = summary["avg_ivb"] * 12
+
+    summary = summary[[
+        "pitch_label", "count", "usage_pct",
+        "avg_velo", "max_velo", "avg_spin",
+        "avg_hb", "avg_ivb", "whiff_pct"
+    ]].rename(columns={
+        "pitch_label": "Pitch",
+        "count": "Thrown",
+        "usage_pct": "Usage",
+        "avg_velo": "Avg Velo",
+        "max_velo": "Max Velo",
+        "avg_spin": "Avg Spin",
+        "avg_hb": "H. Break",
+        "avg_ivb": "V. Break",
+        "whiff_pct": "Whiff%"
+    })
+
+    return summary.sort_values("Usage", ascending=False).reset_index(drop=True)
 
 
