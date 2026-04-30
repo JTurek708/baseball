@@ -164,22 +164,18 @@ with tab1:
 
         col1, col2 = st.columns([3, 2])
         with col1:
-            st.plotly_chart(plot_movement(df_filtered), use_container_width=True)
-
-        col1, col2 = st.columns([3, 2])
-        with col1:
-            st.plotly_chart(plot_movement(df_filtered), use_container_width=True)
+            st.plotly_chart(plot_movement(df_filtered), use_container_width=True, key="s_movement")
         with col2:
-            st.plotly_chart(plot_usage(df_filtered), use_container_width=True)
+            st.plotly_chart(plot_usage(df_filtered), use_container_width=True, key="s_usage")
 
         col3, col4 = st.columns(2)
         with col3:
-            st.plotly_chart(plot_velo(df_filtered), use_container_width=True)
+            st.plotly_chart(plot_velo(df_filtered), use_container_width=True, key="s_velo")
         with col4:
-            st.plotly_chart(plot_spin(df_filtered), use_container_width=True)
+            st.plotly_chart(plot_spin(df_filtered), use_container_width=True, key="s_spin")
 
         st.markdown("---")
-        st.plotly_chart(plot_count_usage(df_filtered), use_container_width=True)
+        st.plotly_chart(plot_count_usage(df_filtered), use_container_width=True, key="s_count")
 
     else:
         st.info("Search for a pitcher in the sidebar to get started.")
@@ -231,8 +227,8 @@ with tab2:
 
         col1, col2 = st.columns([3, 2])
         with col1:
-            st.plotly_chart(plot_movement_comparison(df_compare), use_container_width=True)
+            st.plotly_chart(plot_movement_comparison(df_compare), use_container_width=True, key="c_movement")
         with col2:
-            st.plotly_chart(plot_usage_comparison(df_compare), use_container_width=True)
+            st.plotly_chart(plot_usage_comparison(df_compare), use_container_width=True, key="c_usage")
     else:
         st.info("Enter two pitchers above and click Compare.")
