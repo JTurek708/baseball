@@ -2,7 +2,7 @@
 
 An interactive baseball analytics tool that lets users explore any MLB pitcher's repertoire through Statcast data — pitch movement, velocity, spin, location, count usage, and platoon splits — all in one editorial-style dashboard.
 
-🔗 **Live app:** [pitch-arsenal-visualizer.streamlit.app](https://pitch-arsenal-visualizer.streamlit.app)
+🔗 **Live app:** [pitcharsenalviz.streamlit.app](https://pitcharsenalviz.streamlit.app)
 ✍️ **Built by:** [Jack Turek](https://jackturek708.com)
 
 ---
