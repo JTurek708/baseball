@@ -295,3 +295,50 @@ def plot_usage_comparison(df):
     )
     fig.update_traces(textposition="outside", textfont_size=10)
     return fig
+
+def plot_velo_comparison(df):
+    df_clean = df.dropna(subset=["release_speed"])
+
+    fig = px.box(
+        df_clean,
+        x="pitch_label",
+        y="release_speed",
+        color="pitcher_name",
+        color_discrete_sequence=PITCHER_COMPARE_COLORS,
+        labels={
+            "pitch_label": "",
+            "release_speed": "Velocity (mph)",
+            "pitcher_name": "Pitcher"
+        },
+        title="Velocity Distribution Comparison",
+        boxmode="group"
+    )
+    fig.update_layout(
+        **EDITORIAL_LAYOUT,
+        legend_title="Pitcher"
+    )
+    return fig
+
+
+def plot_spin_comparison(df):
+    df_clean = df.dropna(subset=["release_spin_rate"])
+
+    fig = px.box(
+        df_clean,
+        x="pitch_label",
+        y="release_spin_rate",
+        color="pitcher_name",
+        color_discrete_sequence=PITCHER_COMPARE_COLORS,
+        labels={
+            "pitch_label": "",
+            "release_spin_rate": "Spin Rate (RPM)",
+            "pitcher_name": "Pitcher"
+        },
+        title="Spin Rate Comparison",
+        boxmode="group"
+    )
+    fig.update_layout(
+        **EDITORIAL_LAYOUT,
+        legend_title="Pitcher"
+    )
+    return fig

@@ -6,7 +6,8 @@ from utils.data import (
 )
 from utils.plots import (
     plot_movement, plot_usage, plot_velo, plot_spin,
-    plot_count_usage, plot_movement_comparison, plot_usage_comparison
+    plot_count_usage, plot_movement_comparison, plot_usage_comparison,
+    plot_velo_comparison, plot_spin_comparison
 )
 
 st.set_page_config(page_title="Pitch Arsenal Visualizer", layout="wide")
@@ -256,6 +257,12 @@ with tab2:
             st.plotly_chart(plot_movement_comparison(df_compare), use_container_width=True, key="c_movement")
         with col2:
             st.plotly_chart(plot_usage_comparison(df_compare), use_container_width=True, key="c_usage")
+
+        col3, col4 = st.columns(2)
+        with col3:
+            st.plotly_chart(plot_velo_comparison(df_compare), use_container_width=True, key="c_velo")
+        with col4:
+            st.plotly_chart(plot_spin_comparison(df_compare), use_container_width=True, key="c_spin")
 
     else:
         st.info("Enter two pitchers above and click Compare.")
