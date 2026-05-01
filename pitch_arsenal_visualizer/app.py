@@ -2,12 +2,13 @@ import streamlit as st
 import pandas as pd
 from utils.data import (
     get_pitcher_id, get_arsenal_data, label_pitcher_data,
-    get_arsenal_summary, get_comparison_summary
+    get_arsenal_summary, get_comparison_summary, split_by_handedness
 )
 from utils.plots import (
     plot_movement, plot_usage, plot_velo, plot_spin,
     plot_count_usage, plot_movement_comparison, plot_usage_comparison,
-    plot_velo_comparison, plot_spin_comparison
+    plot_velo_comparison, plot_spin_comparison,
+    plot_usage_by_hand, plot_whiff_by_hand
 )
 
 st.set_page_config(page_title="Pitch Arsenal Visualizer", layout="wide")
@@ -181,6 +182,23 @@ with tab1:
         st.markdown("---")
         st.plotly_chart(plot_count_usage(df_filtered), use_container_width=True, key="s_count")
 
+        st.markdown("---")
+        st.markdown(
+            "<h3 style='font-family:Playfair Display, Georgia, serif; "
+            "font-style:italic; color:#6B6B6B; font-weight:500; "
+            "margin-top:1.5rem; margin-bottom:0.5rem;'>"
+            "Splits by Batter Handedness</h3>",
+            unsafe_allow_html=True
+        )
+
+        df_split = split_by_handedness(df_filtered)
+
+        sc1, sc2 = st.columns(2)
+        with sc1:
+            st.plotly_chart(plot_usage_by_hand(df_split), use_container_width=True, key="s_hand_usage")
+        with sc2:
+            st.plotly_chart(plot_whiff_by_hand(df_split), use_container_width=True, key="s_hand_whiff")
+
     else:
         st.info("Search for a pitcher in the sidebar to get started.")
 
@@ -263,6 +281,32 @@ with tab2:
             st.plotly_chart(plot_velo_comparison(df_compare), use_container_width=True, key="c_velo")
         with col4:
             st.plotly_chart(plot_spin_comparison(df_compare), use_container_width=True, key="c_spin")
+
+        st.markdown("---")
+        st.markdown(
+            "<h3 style='font-family:Playfair Display, Georgia, serif; "
+            "font-style:italic; color:#6B6B6B; font-weight:500; "
+            "margin-top:1.5rem; margin-bottom:0.5rem;'>"
+            "Splits by Batter Handedness</h3>",
+            unsafe_allow_html=True
+        )
+
+        df_compare_split = split_by_handedness(df_compare)
+        pitchers = df_compare_split["pitcher_name"].unique()
+
+        for i, pitcher in enumerate(pitchers):
+            st.markdown(
+                f"<h4 style='font-family:Playfair Display, Georgia, serif; "
+                f"color:#2B2B2B; font-weight:700; margin-top:1rem;'>"
+                f"{pitcher}</h4>",
+                unsafe_allow_html=True
+            )
+            df_pitcher = df_compare_split[df_compare_split["pitcher_name"] == pitcher]
+            pc1, pc2 = st.columns(2)
+            with pc1:
+                st.plotly_chart(plot_usage_by_hand(df_pitcher), use_container_width=True, key=f"c_hand_usage_{i}")
+            with pc2:
+                st.plotly_chart(plot_whiff_by_hand(df_pitcher), use_container_width=True, key=f"c_hand_whiff_{i}")
 
     else:
         st.info("Enter two pitchers above and click Compare.")

@@ -180,4 +180,10 @@ def get_comparison_summary(df):
 
     return summary.sort_values(["Pitch", "Pitcher"]).reset_index(drop=True)
 
+def split_by_handedness(df):
+    df = df.copy()
+    df = df[df["stand"].isin(["L", "R"])]
+    df["batter_hand"] = df["stand"].map({"L": "vs LHH", "R": "vs RHH"})
+    return df
+
 

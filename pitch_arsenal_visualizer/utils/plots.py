@@ -342,3 +342,75 @@ def plot_spin_comparison(df):
         legend_title="Pitcher"
     )
     return fig
+
+def plot_usage_by_hand(df):
+    usage = (
+        df.groupby(["batter_hand", "pitch_label"])
+        .size()
+        .reset_index(name="n")
+    )
+    usage["pct"] = usage.groupby("batter_hand")["n"].transform(lambda x: x / x.sum())
+
+    fig = px.bar(
+        usage,
+        x="pitch_label",
+        y="pct",
+        color="batter_hand",
+        barmode="group",
+        color_discrete_sequence=["#8B2C2C", "#1F3A5F"],
+        text=usage["pct"].map("{:.1%}".format),
+        labels={
+            "pitch_label": "",
+            "pct": "Usage %",
+            "batter_hand": ""
+        },
+        title="Pitch Usage by Batter Handedness"
+    )
+    fig.update_layout(
+        **EDITORIAL_LAYOUT,
+        yaxis_tickformat=".0%",
+        legend_title=""
+    )
+    fig.update_traces(textposition="outside", textfont_size=10)
+    return fig
+
+
+def plot_whiff_by_hand(df):
+    df = df.copy()
+    df["is_whiff"] = df["description"].isin([
+        "swinging_strike", "swinging_strike_blocked", "foul_tip"
+    ])
+    df["is_swing"] = df["description"].isin([
+        "swinging_strike", "swinging_strike_blocked", "foul_tip",
+        "foul", "hit_into_play"
+    ])
+
+    summary = (
+        df.groupby(["batter_hand", "pitch_label"])
+        .agg(whiffs=("is_whiff", "sum"), swings=("is_swing", "sum"))
+        .reset_index()
+    )
+    summary["whiff_pct"] = summary["whiffs"] / summary["swings"].replace(0, 1)
+
+    fig = px.bar(
+        summary,
+        x="pitch_label",
+        y="whiff_pct",
+        color="batter_hand",
+        barmode="group",
+        color_discrete_sequence=["#8B2C2C", "#1F3A5F"],
+        text=summary["whiff_pct"].map("{:.1%}".format),
+        labels={
+            "pitch_label": "",
+            "whiff_pct": "Whiff %",
+            "batter_hand": ""
+        },
+        title="Whiff Rate by Batter Handedness"
+    )
+    fig.update_layout(
+        **EDITORIAL_LAYOUT,
+        yaxis_tickformat=".0%",
+        legend_title=""
+    )
+    fig.update_traces(textposition="outside", textfont_size=10)
+    return fig
