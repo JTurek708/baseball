@@ -1,5 +1,6 @@
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import pandas as pd
 
 PITCH_COLORS = {
@@ -413,4 +414,88 @@ def plot_whiff_by_hand(df):
         legend_title=""
     )
     fig.update_traces(textposition="outside", textfont_size=10)
+    return fig
+
+def plot_location_heatmap(df, count_filter="All"):
+    df = df.copy()
+    df = df.dropna(subset=["plate_x", "plate_z"])
+
+    if count_filter != "All":
+        df = df[df["count_str"] == count_filter]
+
+    if df.empty:
+        return None
+
+    pitches = sorted(df["pitch_label"].unique())
+    n = len(pitches)
+    cols = min(n, 4)
+    rows = (n + cols - 1) // cols
+
+    fig = make_subplots(
+        rows=rows, cols=cols,
+        subplot_titles=pitches,
+        horizontal_spacing=0.06,
+        vertical_spacing=0.10
+    )
+
+    SZ_LEFT, SZ_RIGHT = -0.83, 0.83
+    SZ_BOT, SZ_TOP    = 1.5, 3.5
+
+    for i, pitch in enumerate(pitches):
+        r = i // cols + 1
+        c = i % cols + 1
+        sub = df[df["pitch_label"] == pitch]
+
+        fig.add_trace(
+            go.Histogram2dContour(
+                x=sub["plate_x"],
+                y=sub["plate_z"],
+                colorscale=[
+                    [0.0,  "#F5F1E8"],
+                    [0.15, "#F0D8B8"],
+                    [0.35, "#E8A87C"],
+                    [0.55, "#D9534F"],
+                    [0.75, "#A52828"],
+                    [1.0,  "#6B1414"]
+                ],
+                showscale=False,
+                ncontours=15,
+                contours=dict(coloring="fill", showlines=False),
+                line=dict(width=0)
+            ),
+            row=r, col=c
+        )
+
+        fig.add_shape(
+            type="rect",
+            x0=SZ_LEFT, x1=SZ_RIGHT,
+            y0=SZ_BOT, y1=SZ_TOP,
+            line=dict(color="#2B2B2B", width=2),
+            fillcolor="rgba(0,0,0,0)",
+            row=r, col=c
+        )
+
+        fig.update_xaxes(
+            range=[-2, 2], showgrid=False, zeroline=False,
+            showticklabels=False, row=r, col=c
+        )
+        fig.update_yaxes(
+            range=[0.5, 4.5], showgrid=False, zeroline=False,
+            showticklabels=False, scaleanchor=f"x{i+1 if i > 0 else ''}",
+            scaleratio=1, row=r, col=c
+        )
+
+    fig.update_layout(
+        **EDITORIAL_LAYOUT,
+        height=300 * rows,
+        showlegend=False
+    )
+    fig.update_layout(
+        title=dict(
+            text=f"Pitch Locations — Catcher's View ({count_filter})",
+            font=dict(family="Playfair Display, Georgia, serif", size=20, color="#2B2B2B"),
+            x=0,
+            xanchor="left"
+        )
+    )
     return fig

@@ -186,4 +186,10 @@ def split_by_handedness(df):
     df["batter_hand"] = df["stand"].map({"L": "vs LHH", "R": "vs RHH"})
     return df
 
+def add_count_column(df):
+    df = df.copy()
+    df = df.dropna(subset=["balls", "strikes"])
+    df["count_str"] = df["balls"].astype(int).astype(str) + "-" + df["strikes"].astype(int).astype(str)
+    return df
+
 

@@ -2,14 +2,17 @@ import streamlit as st
 import pandas as pd
 from utils.data import (
     get_pitcher_id, get_arsenal_data, label_pitcher_data,
-    get_arsenal_summary, get_comparison_summary, split_by_handedness
+    get_arsenal_summary, get_comparison_summary, split_by_handedness,
+    add_count_column
 )
 from utils.plots import (
     plot_movement, plot_usage, plot_velo, plot_spin,
     plot_count_usage, plot_movement_comparison, plot_usage_comparison,
     plot_velo_comparison, plot_spin_comparison,
-    plot_usage_by_hand, plot_whiff_by_hand
+    plot_usage_by_hand, plot_whiff_by_hand,
+    plot_location_heatmap
 )
+
 
 st.set_page_config(page_title="Pitch Arsenal Visualizer", layout="wide")
 st.markdown("""
@@ -198,6 +201,32 @@ with tab1:
             st.plotly_chart(plot_usage_by_hand(df_split), use_container_width=True, key="s_hand_usage")
         with sc2:
             st.plotly_chart(plot_whiff_by_hand(df_split), use_container_width=True, key="s_hand_whiff")
+
+        st.markdown("---")
+        st.markdown(
+            "<h3 style='font-family:Playfair Display, Georgia, serif; "
+            "font-style:italic; color:#6B6B6B; font-weight:500; "
+            "margin-top:1.5rem; margin-bottom:0.5rem;'>"
+            "Pitch Locations</h3>",
+            unsafe_allow_html=True
+        )
+
+        df_loc = add_count_column(df_filtered)
+        count_options = ["All", "0-0", "1-0", "2-0", "3-0",
+                         "0-1", "1-1", "2-1", "3-1",
+                         "0-2", "1-2", "2-2", "3-2"]
+
+        selected_count = st.selectbox(
+            "Filter by count",
+            options=count_options,
+            key="s_count_filter"
+        )
+
+        loc_fig = plot_location_heatmap(df_loc, count_filter=selected_count)
+        if loc_fig is not None:
+            st.plotly_chart(loc_fig, use_container_width=True, key="s_location")
+        else:
+            st.info("No pitches found for this count.")
 
     else:
         st.info("Search for a pitcher in the sidebar to get started.")
