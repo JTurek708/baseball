@@ -124,27 +124,46 @@ main { padding: 28px; max-width: 1400px; margin: 0 auto; }
 .score-num .dash { color: var(--muted); padding: 0 8px; }
 .score-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-top: 4px; text-align: center; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; margin-bottom: 28px; }
-.card {
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 3px; padding: 14px 18px; position: relative; transition: border-color .15s;
+/* ROSTER TABLES */
+.roster-section { margin-bottom: 28px; }
+.roster-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 3px;
+  overflow: hidden;
 }
-.card:hover { border-color: var(--muted); }
-.card.bench { opacity: .5; }
-.slot {
-  position: absolute; top: 11px; right: 13px;
-  font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
-  color: var(--dim); background: var(--border); padding: 2px 6px; border-radius: 2px;
+.roster-table thead th {
+  background: var(--border); color: var(--dim);
+  text-transform: uppercase; letter-spacing: 1px;
+  font-family: var(--mono); font-size: 9px;
+  padding: 9px 12px; text-align: left; white-space: nowrap;
 }
-.slot.live { color: var(--lime); }
-.p-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
-.p-sub { font-family: var(--mono); font-size: 10px; color: var(--dim); margin-bottom: 10px; }
-.p-sub .inj { color: var(--red); margin-left: 6px; }
-.stats { display: flex; gap: 14px; flex-wrap: wrap; }
-.stat { display: flex; flex-direction: column; gap: 2px; }
-.stat-l { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); }
-.stat-v { font-family: var(--mono); font-size: 13px; font-weight: 500; }
-.pts { position: absolute; bottom: 12px; right: 16px; font-family: var(--display); font-size: 20px; color: var(--dim); }
+.roster-table thead th.r { text-align: right; }
+.roster-table tbody tr {
+  border-bottom: 1px solid var(--border); transition: background .1s;
+}
+.roster-table tbody tr:last-child { border-bottom: none; }
+.roster-table tbody tr:hover { background: rgba(255,255,255,.02); }
+.roster-table tbody tr.bench { opacity: .55; }
+.roster-table tbody td { padding: 11px 12px; white-space: nowrap; }
+.roster-table tbody td.slot-cell {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--dim);
+  width: 60px;
+}
+.roster-table tbody tr:not(.bench) td.slot-cell { color: var(--lime); }
+.roster-table tbody td.name-cell { font-weight: 600; font-size: 14px; }
+.roster-table tbody td.name-cell .inj { color: var(--red); margin-left: 6px; font-family: var(--mono); font-size: 10px; }
+.roster-table tbody td.meta-cell {
+  font-family: var(--mono); font-size: 11px; color: var(--dim);
+}
+.roster-table tbody td.stat {
+  font-family: var(--mono); font-size: 12px; text-align: right;
+}
+.roster-table tbody td.pts {
+  font-family: var(--display); font-size: 16px; text-align: right;
+  letter-spacing: 1px; color: var(--text);
+}
+.roster-table tbody tr.bench td.pts { color: var(--dim); }
 
 /* STANDINGS */
 .standings-list { display: flex; flex-direction: column; gap: 6px; }
@@ -375,38 +394,115 @@ function copyMd() {
 }
 
 // ── Roster / Matchup ──────────────────────────────────────────────────────────
+const SLOT_ORDER = ['C','1B','2B','3B','SS','MI','CI','LF','CF','RF','OF','DH','UTIL','SP','RP','P','BE','IL','IL10','NA'];
+
+function slotRank(slot) {
+  const i = SLOT_ORDER.indexOf(slot);
+  return i === -1 ? 999 : i;
+}
+
 async function loadRoster() {
   document.getElementById('active-grid').innerHTML = '<div class="loading"><div class="spin"></div>pulling roster...</div>';
+  document.getElementById('bench-grid').innerHTML = '';
   try {
     const [players, matchup] = await Promise.all([api('/api/roster'), api('/api/matchup')]);
     renderMatchup(matchup);
-    const active = players.filter(p => !p.on_bench);
-    const bench  = players.filter(p =>  p.on_bench);
-    document.getElementById('active-count').textContent = active.length + ' players';
-    document.getElementById('active-grid').innerHTML = active.map(card).join('');
-    document.getElementById('bench-grid').innerHTML  = bench.map(p => card(p, true)).join('');
+
+    const sorted   = [...players].sort((a, b) => slotRank(a.lineup_slot) - slotRank(b.lineup_slot));
+    const hitters  = sorted.filter(p => !p.on_bench && !p.is_pitcher);
+    const pitchers = sorted.filter(p => !p.on_bench &&  p.is_pitcher);
+    const bench    = sorted.filter(p =>  p.on_bench);
+
+    document.getElementById('active-count').textContent =
+      `${hitters.length} hitters · ${pitchers.length} pitchers · ${bench.length} bench`;
+
+    document.getElementById('active-grid').innerHTML =
+      hitterTable(hitters) + pitcherTable(pitchers);
+    document.getElementById('bench-grid').innerHTML = benchTable(bench);
   } catch(e) { err('active-grid', e.message); }
 }
 
-function card(p, benched=false) {
-  const isLive = !p.on_bench;
-  const inj = p.injured ? `<span class="inj">● ${p.injury_status||'INJ'}</span>` : '';
-  const pos = (p.positions||[]).join(', ');
-  const stats = p.is_pitcher
-    ? [statBlk('xERA', f3(p.xera)), statBlk('K%', fpct(p.k_percent)),
-       statBlk('BB%', fpct(p.bb_percent)), statBlk('Whiff%', fpct(p.whiff_percent))].join('')
-    : [statBlk('xwOBA', f3(p.xwoba)), statBlk('Barrel%', fpct(p.barrel_batted_rate)),
-       statBlk('HH%', fpct(p.hard_hit_percent)), statBlk('K%', fpct(p.k_percent))].join('');
-  return `<div class="card${benched?' bench':''}">
-    <div class="slot${isLive?' live':''}">${p.lineup_slot||'—'}</div>
-    <div class="p-name">${p.name}</div>
-    <div class="p-sub">${p.pro_team||'—'} · ${pos}${inj}</div>
-    <div class="stats">${stats}</div>
-    <div class="pts">${p.fantasy_score??'—'}</div>
+function hitterTable(rows) {
+  if (!rows.length) return '';
+  const body = rows.map(p => `
+    <tr>
+      <td class="slot-cell">${p.lineup_slot || '—'}</td>
+      <td class="name-cell">${p.name}${p.injured ? `<span class="inj">${p.injury_status||'INJ'}</span>` : ''}</td>
+      <td class="meta-cell">${(p.positions||[]).join(', ')}</td>
+      <td class="meta-cell">${p.pro_team || '—'}</td>
+      <td class="stat">${f3(p.xwoba)}</td>
+      <td class="stat">${fpct(p.barrel_batted_rate)}</td>
+      <td class="stat">${fpct(p.hard_hit_percent)}</td>
+      <td class="stat">${fpct(p.k_percent)}</td>
+      <td class="pts">${p.fantasy_score ?? '—'}</td>
+    </tr>`).join('');
+  return `<div class="roster-section">
+    <table class="roster-table">
+      <thead><tr>
+        <th>Slot</th><th>Player</th><th>Pos</th><th>Team</th>
+        <th class="r">xwOBA</th><th class="r">Barrel%</th>
+        <th class="r">HH%</th><th class="r">K%</th>
+        <th class="r">Pts</th>
+      </tr></thead>
+      <tbody>${body}</tbody>
+    </table>
   </div>`;
 }
-function statBlk(label, val) {
-  return `<div class="stat"><span class="stat-l">${label}</span><span class="stat-v">${val}</span></div>`;
+
+function pitcherTable(rows) {
+  if (!rows.length) return '';
+  const body = rows.map(p => `
+    <tr>
+      <td class="slot-cell">${p.lineup_slot || '—'}</td>
+      <td class="name-cell">${p.name}${p.injured ? `<span class="inj">${p.injury_status||'INJ'}</span>` : ''}</td>
+      <td class="meta-cell">${(p.positions||[]).join(', ')}</td>
+      <td class="meta-cell">${p.pro_team || '—'}</td>
+      <td class="stat">${f3(p.xera)}</td>
+      <td class="stat">${fpct(p.k_percent)}</td>
+      <td class="stat">${fpct(p.bb_percent)}</td>
+      <td class="stat">${fpct(p.whiff_percent)}</td>
+      <td class="pts">${p.fantasy_score ?? '—'}</td>
+    </tr>`).join('');
+  return `<div class="roster-section">
+    <table class="roster-table">
+      <thead><tr>
+        <th>Slot</th><th>Player</th><th>Pos</th><th>Team</th>
+        <th class="r">xERA</th><th class="r">K%</th>
+        <th class="r">BB%</th><th class="r">Whiff%</th>
+        <th class="r">Pts</th>
+      </tr></thead>
+      <tbody>${body}</tbody>
+    </table>
+  </div>`;
+}
+
+function benchTable(rows) {
+  if (!rows.length) return '';
+  const body = rows.map(p => {
+    const stat1 = p.is_pitcher ? f3(p.xera)            : f3(p.xwoba);
+    const stat2 = p.is_pitcher ? fpct(p.k_percent)     : fpct(p.barrel_batted_rate);
+    const stat3 = p.is_pitcher ? fpct(p.whiff_percent) : fpct(p.hard_hit_percent);
+    const stat1Label = p.is_pitcher ? 'xERA' : 'xwOBA';
+    return `
+      <tr class="bench">
+        <td class="slot-cell">${p.lineup_slot || '—'}</td>
+        <td class="name-cell">${p.name}${p.injured ? `<span class="inj">${p.injury_status||'INJ'}</span>` : ''}</td>
+        <td class="meta-cell">${(p.positions||[]).join(', ')}</td>
+        <td class="meta-cell">${p.pro_team || '—'}</td>
+        <td class="stat" title="${stat1Label}">${stat1}</td>
+        <td class="stat">${stat2}</td>
+        <td class="stat">${stat3}</td>
+        <td class="pts">${p.fantasy_score ?? '—'}</td>
+      </tr>`;
+  }).join('');
+  return `<table class="roster-table">
+    <thead><tr>
+      <th>Slot</th><th>Player</th><th>Pos</th><th>Team</th>
+      <th class="r">Quality</th><th class="r">·</th>
+      <th class="r">·</th><th class="r">Pts</th>
+    </tr></thead>
+    <tbody>${body}</tbody>
+  </table>`;
 }
 
 function renderMatchup(m) {
