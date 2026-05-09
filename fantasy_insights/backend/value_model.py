@@ -1,13 +1,13 @@
 """
 value_model.py
 Roster enrichment + add/drop suggestions.
-Delegates scoring to the configured format adapter.
+Uses ESPN's pre-computed fantasy points (already in league scoring format)
+and overlays Savant predictive stats for context.
 """
 from backend.data_sources import savant, clean_nan
 from backend.config import SCORING_FORMAT
 from backend.formats import points_h2h
 
-# Format registry — add new formats here
 ADAPTERS = {
     "points_h2h": points_h2h,
 }
@@ -18,25 +18,30 @@ def adapter():
 
 
 def enrich_roster(roster: list[dict]) -> list[dict]:
-    fmt = adapter()
+    """Add Savant predictive overlays to each rostered player.
+    Fantasy score comes from ESPN's pre-computed points."""
     out = []
     for p in roster:
-        is_pit = fmt.is_pitcher(p)
+        is_pit = adapter().is_pitcher(p)
         sv     = savant.lookup(p["name"], is_pitcher=is_pit)
-        score  = fmt.score(sv, is_pit)
-        merged = {**p, **sv, "fantasy_score": round(score, 1), "is_pitcher": is_pit}
+        merged = {
+            **p,
+            **sv,
+            "fantasy_score": round(p.get("season_points", 0.0), 1),
+            "is_pitcher": is_pit,
+        }
         out.append(clean_nan(merged))
     return sorted(out, key=lambda x: -x["fantasy_score"])
 
+
 def add_drop_suggestions(roster: list[dict], free_agents: list[dict], n: int = 8) -> list[dict]:
-    fmt = adapter()
+    """Compare each FA's ESPN season points to your weakest same-type player."""
     scored_roster = enrich_roster(roster)
     suggestions = []
 
     for fa in free_agents:
-        is_pit = fmt.is_pitcher(fa)
-        sv     = savant.lookup(fa["name"], is_pitcher=is_pit)
-        fa_sc  = fmt.score(sv, is_pit)
+        is_pit = adapter().is_pitcher(fa)
+        fa_sc  = round(fa.get("season_points", 0.0), 1)
 
         same_type = [p for p in scored_roster if p["is_pitcher"] == is_pit]
         if not same_type:
@@ -49,7 +54,7 @@ def add_drop_suggestions(roster: list[dict], free_agents: list[dict], n: int = 8
             suggestions.append({
                 "add":        fa["name"],
                 "add_team":   fa.get("pro_team", ""),
-                "add_score":  round(fa_sc, 1),
+                "add_score":  fa_sc,
                 "drop":       weakest["name"],
                 "drop_score": weakest["fantasy_score"],
                 "gain":       round(gain, 1),

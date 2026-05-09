@@ -20,15 +20,32 @@ def get_my_team():
 
 def _player_dict(p) -> dict:
     positions = p.eligibleSlots if isinstance(p.eligibleSlots, list) else [p.eligibleSlots]
+
+    # Pull season-to-date stats (key 0 = season). Use empty dict if missing.
+    season_stats = {}
+    season_points = 0.0
+    projected_points = 0.0
+    projected_stats = {}
+    if hasattr(p, "stats") and p.stats:
+        season_block = p.stats.get(0, {})
+        season_stats = season_block.get("breakdown", {})
+        season_points = season_block.get("points", 0.0)
+        projected_points = season_block.get("projected_points", 0.0)
+        projected_stats = season_block.get("projected_breakdown", {})
+
     return {
-        "name":          p.name,
-        "espn_id":       p.playerId,
-        "positions":     positions,
-        "pro_team":      p.proTeam,
-        "injured":       p.injured,
-        "injury_status": p.injuryStatus,
-        "lineup_slot":   getattr(p, "lineupSlot", None),
-        "on_bench":      getattr(p, "lineupSlot", None) in ("BE", "IL", "IL10", "NA"),
+        "name":             p.name,
+        "espn_id":          p.playerId,
+        "positions":        positions,
+        "pro_team":         p.proTeam,
+        "injured":          p.injured,
+        "injury_status":    p.injuryStatus,
+        "lineup_slot":      getattr(p, "lineupSlot", None),
+        "on_bench":         getattr(p, "lineupSlot", None) in ("BE", "IL", "IL10", "NA"),
+        "season_stats":     season_stats,
+        "season_points":    season_points,
+        "projected_points": projected_points,
+        "projected_stats":  projected_stats,
     }
 
 
