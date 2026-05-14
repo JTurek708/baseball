@@ -39,14 +39,14 @@ export function Leaderboard() {
       </div>
 
       {error ? (
-        <div className="bg-red-500/10 border border-red-500/30 rounded p-3.5 font-mono text-xs text-red-500">⚠ {error}</div>
+        <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">⚠ {error}</div>
       ) : loading ? (
-        <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-zinc-500 font-mono text-xs">
-          <div className="w-7 h-7 border-2 border-zinc-800 border-t-lime-400 rounded-full animate-spin" />
+        <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
+          <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
           loading...
         </div>
       ) : !data || data.length === 0 ? (
-        <div className="text-zinc-500 font-mono text-xs py-12 text-center">No data.</div>
+        <div className="text-leather font-mono text-xs py-12 text-center">No data.</div>
       ) : (
         <LbTable rows={data} type={type} />
       )}
@@ -60,8 +60,8 @@ function ToggleButton({ active, onClick, children }: { active: boolean; onClick:
       onClick={onClick}
       className={`font-mono text-[9px] tracking-wider uppercase px-3 py-1.5 rounded-sm transition-colors ${
         active
-          ? "bg-lime-400/10 border border-lime-400 text-lime-400"
-          : "bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-zinc-200"
+          ? "bg-oxblood/10 border border-lime-400 text-oxblood"
+          : "bg-cream-deep border border-oak text-leather hover:text-walnut"
       }`}
     >
       {children}
@@ -83,26 +83,26 @@ function LbTable({ rows, type }: { rows: LbRow[]; type: LbType }) {
     : ["xERA",  "K%", "BB%", "Whiff%", "HH%"]
 
   return (
-    <div className="overflow-x-auto bg-zinc-900 border border-zinc-800 rounded-sm">
+    <div className="overflow-x-auto bg-cream-deep border border-oak rounded-sm">
       <table className="w-full border-collapse font-mono text-xs">
         <thead>
-          <tr className="bg-zinc-800">
-            <th className="text-left text-[9px] tracking-wider uppercase text-zinc-500 px-3 py-2 whitespace-nowrap">#</th>
-            <th className="text-left text-[9px] tracking-wider uppercase text-zinc-500 px-3 py-2 whitespace-nowrap">Name</th>
+          <tr className="bg-oak">
+            <th className="text-left text-[9px] tracking-wider uppercase text-leather px-3 py-2 whitespace-nowrap">#</th>
+            <th className="text-left text-[9px] tracking-wider uppercase text-leather px-3 py-2 whitespace-nowrap">Name</th>
             {heads.map(h => (
-              <th key={h} className="text-left text-[9px] tracking-wider uppercase text-zinc-500 px-3 py-2 whitespace-nowrap">{h}</th>
+              <th key={h} className="text-left text-[9px] tracking-wider uppercase text-leather px-3 py-2 whitespace-nowrap">{h}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {rows.slice(0, 50).map((r, i) => (
-            <tr key={i} className="border-b border-zinc-800 last:border-b-0 hover:bg-zinc-900/50">
-              <td className="text-zinc-500 text-[10px] px-3 py-2.5">{i + 1}</td>
-              <td className="text-lime-400 font-medium px-3 py-2.5">{String(r[nameKey] ?? r.player_name ?? "—")}</td>
+            <tr key={i} className="border-b border-oak last:border-b-0 hover:bg-cream-deep/50">
+              <td className="text-leather text-[10px] px-3 py-2.5">{i + 1}</td>
+              <td className="text-oxblood font-medium px-3 py-2.5">{String(r[nameKey] ?? r.player_name ?? "—")}</td>
               {cols.map(c => {
                 const v = r[c] as number | undefined | string
                 const fmt = (c.includes("percent") || c.includes("rate")) ? fpct(v) : f3(v)
-                return <td key={c} className="text-zinc-200 px-3 py-2.5">{fmt}</td>
+                return <td key={c} className="text-walnut px-3 py-2.5">{fmt}</td>
               })}
             </tr>
           ))}

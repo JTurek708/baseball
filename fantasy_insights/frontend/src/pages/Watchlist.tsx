@@ -45,7 +45,7 @@ export function Watchlist() {
         action={
           <button
             onClick={handleExport}
-            className="font-mono text-[10px] tracking-[0.1em] uppercase px-3.5 py-1.5 bg-lime-400/10 border border-lime-400/30 text-lime-400 rounded hover:bg-lime-400/20 transition-colors"
+            className="font-mono text-[10px] tracking-[0.1em] uppercase px-3.5 py-1.5 bg-oxblood/10 border border-oxblood/30 text-oxblood rounded hover:bg-oxblood/20 transition-colors"
           >
             Export Markdown
           </button>
@@ -97,7 +97,7 @@ function SectionHeader({
     <div className="flex items-baseline justify-between mb-3.5">
       <div className="flex items-baseline gap-2.5">
         <h2 className="font-bold tracking-[0.15em] text-lg uppercase">{title}</h2>
-        <span className="font-mono text-[9px] tracking-wider uppercase text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-sm">
+        <span className="font-mono text-[9px] tracking-wider uppercase text-leather bg-oak px-2 py-0.5 rounded-sm">
           {tag}
         </span>
       </div>
@@ -117,19 +117,19 @@ function ShowMore({
   if (shown >= total) return null
   const remaining = total - shown
   return (
-    <div className="mt-3 flex items-center justify-center gap-3 font-mono text-[11px] text-zinc-500">
+    <div className="mt-3 flex items-center justify-center gap-3 font-mono text-[11px] text-leather">
       <span>showing {shown} of {total}</span>
-      <span className="text-zinc-700">·</span>
+      <span className="text-leather-soft">·</span>
       <button
         onClick={onMore}
-        className="text-zinc-300 hover:text-lime-400 transition-colors uppercase tracking-wider"
+        className="text-walnut-soft hover:text-oxblood transition-colors uppercase tracking-wider"
       >
         Show 12 more
       </button>
-      <span className="text-zinc-700">·</span>
+      <span className="text-leather-soft">·</span>
       <button
         onClick={onAll}
-        className="text-zinc-300 hover:text-lime-400 transition-colors uppercase tracking-wider"
+        className="text-walnut-soft hover:text-oxblood transition-colors uppercase tracking-wider"
       >
         Show all
       </button>
@@ -145,7 +145,7 @@ function PlayerList({
 }) {
   if (players.length === 0) {
     return (
-      <div className="text-zinc-500 font-mono text-xs py-12 text-center">
+      <div className="text-leather font-mono text-xs py-12 text-center">
         {kind === "buy"
           ? "No strong buy signals right now."
           : "Your roster looks clean — no sell signals."}
@@ -172,12 +172,12 @@ function PlayerRow({
   // Color logic — strong gets the bright accent, moderate gets blue/orange
   const borderColor =
     kind === "buy"
-      ? (player.strength === "strong" ? "border-l-lime-400" : "border-l-blue-500")
-      : (player.strength === "strong" ? "border-l-red-500"  : "border-l-orange-500")
+      ? (player.strength === "strong" ? "border-l-oxblood" : "border-l-brass")
+      : (player.strength === "strong" ? "border-l-rust"  : "border-l-brass-deep")
   const arrowColor =
     kind === "buy"
-      ? (player.strength === "strong" ? "text-lime-400" : "text-blue-500")
-      : (player.strength === "strong" ? "text-red-500"  : "text-orange-500")
+      ? (player.strength === "strong" ? "text-oxblood" : "text-brass")
+      : (player.strength === "strong" ? "text-rust"  : "text-brass-deep")
 
   const statusBadge =
     player.status === "fa"    ? <Badge color="lime">FA</Badge>
@@ -185,7 +185,7 @@ function PlayerRow({
   :                              <Badge color="zinc">ROST</Badge>
 
   return (
-    <div className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 bg-zinc-900 border border-zinc-800 border-l-[3px] ${borderColor} rounded-sm px-4 py-3.5 hover:border-zinc-700 transition-colors`}>
+    <div className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 bg-cream-deep border border-oak border-l-[3px] ${borderColor} rounded-sm px-4 py-3.5 hover:border-oak-deep transition-colors`}>
       <div className={`font-bold text-xl w-8 text-center ${arrowColor}`}>
         {arrow}
       </div>
@@ -194,11 +194,11 @@ function PlayerRow({
           {player.name}
           {statusBadge}
         </div>
-        <div className="font-mono text-[11px] text-zinc-500 leading-relaxed">
+        <div className="font-mono text-[11px] text-leather leading-relaxed">
           {player.reasoning.map((r, i) => <div key={i}>{r}</div>)}
         </div>
       </div>
-      <div className="font-bold text-xl text-zinc-500 text-right min-w-[54px]">
+      <div className="font-bold text-xl text-leather text-right min-w-[54px]">
         {(player.composite * 100).toFixed(0)}
       </div>
     </div>
@@ -207,9 +207,9 @@ function PlayerRow({
 
 function Badge({ color, children }: { color: "lime" | "red" | "zinc"; children: React.ReactNode }) {
   const classes = {
-    lime: "bg-lime-400/10 text-lime-400",
-    red:  "bg-red-500/10 text-red-500",
-    zinc: "bg-zinc-800 text-zinc-500",
+    lime: "bg-oxblood/10 text-oxblood",
+    red:  "bg-rust/10 text-rust",
+    zinc: "bg-oak text-leather",
   }[color]
   return (
     <span className={`font-mono text-[9px] tracking-wider uppercase px-1.5 py-0.5 rounded-sm ${classes}`}>
@@ -233,20 +233,20 @@ function ExportModal({
       className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-7"
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
-      <div className="bg-zinc-900 border border-zinc-800 rounded p-5 max-w-3xl w-full max-h-[80vh] flex flex-col">
+      <div className="bg-cream-deep border border-oak rounded p-5 max-w-3xl w-full max-h-[80vh] flex flex-col">
         <div className="flex justify-between items-center mb-3.5">
           <h3 className="font-bold tracking-[0.15em] text-lg uppercase">Markdown Export</h3>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 text-lg">✕</button>
+          <button onClick={onClose} className="text-leather hover:text-walnut text-lg">✕</button>
         </div>
         <textarea
           readOnly
           value={markdown}
-          className="flex-1 bg-zinc-950 border border-zinc-800 rounded p-3.5 text-zinc-200 font-mono text-xs min-h-[400px] leading-relaxed resize-y"
+          className="flex-1 bg-cream border border-oak rounded p-3.5 text-walnut font-mono text-xs min-h-[400px] leading-relaxed resize-y"
         />
         <div className="flex gap-2 mt-3 justify-end">
           <button
             onClick={copy}
-            className="font-mono text-[10px] tracking-[0.1em] uppercase px-4 py-2 bg-lime-400 text-zinc-950 rounded font-bold"
+            className="font-mono text-[10px] tracking-[0.1em] uppercase px-4 py-2 bg-oxblood text-zinc-950 rounded font-bold"
           >
             Copy to Clipboard
           </button>
@@ -258,8 +258,8 @@ function ExportModal({
 
 function LoadingState() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-zinc-500 font-mono text-xs">
-      <div className="w-7 h-7 border-2 border-zinc-800 border-t-lime-400 rounded-full animate-spin" />
+    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
+      <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
       scanning the league...
     </div>
   )
@@ -268,7 +268,7 @@ function LoadingState() {
 function ErrorState({ message }: { message: string }) {
   return (
     <div className="p-7">
-      <div className="bg-red-500/10 border border-red-500/30 rounded p-3.5 font-mono text-xs text-red-500">
+      <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">
         ⚠ {message}
       </div>
     </div>
