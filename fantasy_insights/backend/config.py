@@ -39,5 +39,5 @@ PITCHER_XERA_GAP           = 0.50    # |xERA - ERA| in earned runs
 PITCHER_BIG_GAP            = 1.00    # ≥ this is a "strong" signal
 
 # ── Watchlist sizing ──────────────────────────────────────────────────────────
-WATCHLIST_BUY_COUNT  = 8
-WATCHLIST_SELL_COUNT = 5
+WATCHLIST_BUY_COUNT  = 100
+WATCHLIST_SELL_COUNT = 100

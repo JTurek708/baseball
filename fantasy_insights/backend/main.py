@@ -4,9 +4,9 @@ FastAPI app — routes, frontend serving.
 Run with: uvicorn backend.main:app --reload --port 8000
 """
 from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, PlainTextResponse
-import os
+# from fastapi.staticfiles import StaticFiles
+from fastapi.responses import PlainTextResponse
+# import os
 
 from backend.data_sources import espn, savant, fangraphs
 from backend.signals import composite
@@ -14,7 +14,6 @@ from backend.value_model import enrich_roster, add_drop_suggestions
 
 app = FastAPI(title="Fantasy Hub")
 
-FRONTEND = os.path.join(os.path.dirname(__file__), "..", "frontend")
 
 
 # ── Health ────────────────────────────────────────────────────────────────────
@@ -102,11 +101,3 @@ def lb_pitchers(source: str = "savant"):
     except Exception as e:
         raise HTTPException(500, str(e))
 
-
-# ── Frontend ──────────────────────────────────────────────────────────────────
-
-app.mount("/static", StaticFiles(directory=os.path.join(FRONTEND, "static")), name="static")
-
-@app.get("/")
-def index():
-    return FileResponse(os.path.join(FRONTEND, "index.html"))
