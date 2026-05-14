@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fantasy Hub · L Train Legends</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0c0e12;
+  --panel:   #12151c;
+  --border:  #1c2030;
+  --lime:    #c8f135;
+  --blue:    #4a90ff;
+  --red:     #ff4d6d;
+  --orange:  #ff9540;
+  --muted:   #3a4055;
+  --dim:     #606880;
+  --text:    #dde2f0;
+  --mono:    'IBM Plex Mono', monospace;
+  --sans:    'IBM Plex Sans', sans-serif;
+  --display: 'Bebas Neue', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; min-height: 100vh; }
+
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 52px;
+  background: var(--panel); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 50;
+}
+.logo { font-family: var(--display); font-size: 24px; letter-spacing: 3px; }
+.logo em { color: var(--lime); font-style: normal; }
+.meta { font-family: var(--mono); font-size: 10px; color: var(--dim); text-align: right; line-height: 1.6; }
+.meta strong { color: var(--lime); }
+
+nav {
+  display: flex; padding: 0 28px;
+  background: var(--panel); border-bottom: 1px solid var(--border);
+}
+nav button {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 18px; background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--dim); cursor: pointer; transition: all .15s;
+}
+nav button:hover { color: var(--text); }
+nav button.on { color: var(--lime); border-bottom-color: var(--lime); }
+
+main { padding: 28px; max-width: 1400px; margin: 0 auto; }
+.page { display: none; }
+.page.on { display: block; }
+
+.sh { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.sh-l { display: flex; align-items: baseline; gap: 10px; }
+.sh h2 { font-family: var(--display); font-size: 19px; letter-spacing: 2px; }
+.sh .tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
+  color: var(--dim); background: var(--border); padding: 2px 8px; border-radius: 2px; text-transform: uppercase;
+}
+.btn-export {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; background: rgba(200,241,53,.07);
+  border: 1px solid rgba(200,241,53,.3); border-radius: 2px;
+  color: var(--lime); cursor: pointer; transition: all .15s;
+}
+.btn-export:hover { background: rgba(200,241,53,.15); }
+
+/* WATCHLIST CARDS (the Phase 1 hero element) */
+.watch-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+.watch-row {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 16px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 3px; padding: 14px 18px;
+  border-left: 3px solid var(--muted);
+  transition: border-color .15s;
+}
+.watch-row:hover { border-right-color: var(--muted); }
+.watch-row.buy.strong   { border-left-color: var(--lime); }
+.watch-row.buy.moderate { border-left-color: var(--blue); }
+.watch-row.sell.strong   { border-left-color: var(--red); }
+.watch-row.sell.moderate { border-left-color: var(--orange); }
+
+.badge-icon {
+  font-family: var(--display); font-size: 22px;
+  width: 32px; text-align: center;
+}
+.buy.strong   .badge-icon { color: var(--lime); }
+.buy.moderate .badge-icon { color: var(--blue); }
+.sell.strong   .badge-icon { color: var(--red); }
+.sell.moderate .badge-icon { color: var(--orange); }
+
+.watch-meta { min-width: 0; }
+.watch-name {
+  font-size: 15px; font-weight: 600; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.watch-name .ptag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
+  background: var(--border); color: var(--dim);
+  padding: 1px 6px; border-radius: 2px; text-transform: uppercase;
+}
+.watch-name .ptag.fa { background: rgba(200,241,53,.1); color: var(--lime); }
+.watch-name .ptag.yours { background: rgba(255,77,109,.1); color: var(--red); }
+.watch-reason {
+  font-family: var(--mono); font-size: 11px; color: var(--dim); line-height: 1.5;
+}
+.watch-score {
+  font-family: var(--display); font-size: 22px; color: var(--dim);
+  text-align: right; min-width: 54px;
+}
+
+/* ROSTER PAGE */
+.matchup-strip {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 20px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 3px; padding: 20px 28px; margin-bottom: 24px;
+}
+.team-label { font-family: var(--display); font-size: 18px; letter-spacing: 1px; }
+.team-label.me { color: var(--lime); }
+.score-num { font-family: var(--display); font-size: 44px; letter-spacing: 6px; text-align: center; }
+.score-num .dash { color: var(--muted); padding: 0 8px; }
+.score-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-top: 4px; text-align: center; }
+
+/* ROSTER TABLES */
+.roster-section { margin-bottom: 28px; }
+.roster-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 3px;
+  overflow: hidden;
+}
+.roster-table thead th {
+  background: var(--border); color: var(--dim);
+  text-transform: uppercase; letter-spacing: 1px;
+  font-family: var(--mono); font-size: 9px;
+  padding: 9px 12px; text-align: left; white-space: nowrap;
+}
+.roster-table thead th.r { text-align: right; }
+.roster-table tbody tr {
+  border-bottom: 1px solid var(--border); transition: background .1s;
+}
+.roster-table tbody tr:last-child { border-bottom: none; }
+.roster-table tbody tr:hover { background: rgba(255,255,255,.02); }
+.roster-table tbody tr.bench { opacity: .55; }
+.roster-table tbody td { padding: 11px 12px; white-space: nowrap; }
+.roster-table tbody td.slot-cell {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--dim);
+  width: 60px;
+}
+.roster-table tbody tr:not(.bench) td.slot-cell { color: var(--lime); }
+.roster-table tbody td.name-cell { font-weight: 600; font-size: 14px; }
+.roster-table tbody td.name-cell .inj { color: var(--red); margin-left: 6px; font-family: var(--mono); font-size: 10px; }
+.roster-table tbody td.meta-cell {
+  font-family: var(--mono); font-size: 11px; color: var(--dim);
+}
+.roster-table tbody td.stat {
+  font-family: var(--mono); font-size: 12px; text-align: right;
+}
+.roster-table tbody td.pts {
+  font-family: var(--display); font-size: 16px; text-align: right;
+  letter-spacing: 1px; color: var(--text);
+}
+.roster-table tbody tr.bench td.pts { color: var(--dim); }
+
+/* STANDINGS */
+.standings-list { display: flex; flex-direction: column; gap: 6px; }
+.standing-row {
+  display: grid; grid-template-columns: 28px 1fr auto auto;
+  align-items: center; gap: 16px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 3px; padding: 12px 18px;
+}
+.standing-row.me { border-color: rgba(200,241,53,.3); }
+.rank-num { font-family: var(--display); font-size: 18px; color: var(--muted); }
+.standing-name { font-weight: 600; }
+.standing-name small { display: block; font-family: var(--mono); font-size: 10px; color: var(--dim); font-weight: 400; }
+.wl { font-family: var(--mono); font-size: 12px; color: var(--dim); }
+.pts-for { font-family: var(--display); font-size: 18px; color: var(--dim); }
+
+/* LEADERBOARD */
+.lb-controls { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.lb-controls button {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 13px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 2px; color: var(--dim); cursor: pointer;
+}
+.lb-controls button.on { background: rgba(200,241,53,.07); border-color: var(--lime); color: var(--lime); }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+thead th { background: var(--border); color: var(--dim); text-transform: uppercase;
+  letter-spacing: 1px; font-size: 9px; padding: 9px 13px; text-align: left; white-space: nowrap; }
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:hover { background: var(--panel); }
+tbody td { padding: 9px 13px; white-space: nowrap; }
+tbody td.rank { color: var(--dim); font-size: 10px; }
+tbody td.hl { color: var(--lime); font-weight: 500; }
+
+/* States */
+.loading { display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 80px; gap: 14px; color: var(--dim); font-family: var(--mono); font-size: 11px; }
+.spin { width: 28px; height: 28px; border: 2px solid var(--border);
+  border-top-color: var(--lime); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.err { background: rgba(255,77,109,.07); border: 1px solid rgba(255,77,109,.25);
+  border-radius: 3px; padding: 14px 18px;
+  font-family: var(--mono); font-size: 11px; color: var(--red); margin: 12px 0; }
+
+/* Markdown export modal */
+.modal-bg {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.7); z-index: 100; align-items: center; justify-content: center; padding: 28px;
+}
+.modal-bg.on { display: flex; }
+.modal {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+  padding: 20px; max-width: 800px; width: 100%; max-height: 80vh; display: flex; flex-direction: column;
+}
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.modal-head h3 { font-family: var(--display); font-size: 18px; letter-spacing: 2px; }
+.modal-close { background: none; border: none; color: var(--dim); cursor: pointer; font-size: 18px; }
+.modal textarea {
+  flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 3px;
+  padding: 14px; color: var(--text); font-family: var(--mono); font-size: 12px;
+  resize: vertical; min-height: 400px; line-height: 1.6;
+}
+.modal-foot { display: flex; gap: 8px; margin-top: 12px; justify-content: flex-end; }
+.modal-foot button {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 8px 16px; background: var(--lime); border: none; border-radius: 2px;
+  color: var(--bg); cursor: pointer; font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><em>FANTASY</em>HUB</div>
+  <div class="meta"><strong>L Train Legends</strong><br>Los Amistades · 8-team H2H Points</div>
+</header>
+
+<nav>
+  <button class="on" onclick="nav('watchlist',this)">Watchlist</button>
+  <button onclick="nav('roster',this)">Roster</button>
+  <button onclick="nav('add-drop',this)">Add / Drop</button>
+  <button onclick="nav('standings',this)">Standings</button>
+  <button onclick="nav('leaderboard',this)">Leaderboard</button>
+</nav>
+
+<main>
+
+  <!-- WATCHLIST (default) -->
+  <div id="page-watchlist" class="page on">
+    <div class="sh">
+      <div class="sh-l"><h2>Buy Candidates</h2><span class="tag">unlucky · expected to improve</span></div>
+      <button class="btn-export" onclick="exportMarkdown()">Export Markdown</button>
+    </div>
+    <div id="buys" class="watch-list"><div class="loading"><div class="spin"></div>scanning the league...</div></div>
+
+    <div class="sh">
+      <div class="sh-l"><h2>Sell Candidates</h2><span class="tag">running hot · expected to regress</span></div>
+    </div>
+    <div id="sells" class="watch-list"></div>
+  </div>
+
+  <!-- ROSTER -->
+  <div id="page-roster" class="page">
+    <div id="matchup-banner"></div>
+    <div class="sh"><div class="sh-l"><h2>Active</h2><span class="tag" id="active-count">—</span></div></div>
+    <div class="grid" id="active-grid"></div>
+    <div class="sh"><div class="sh-l"><h2>Bench / IL</h2></div></div>
+    <div class="grid" id="bench-grid"></div>
+  </div>
+
+  <!-- ADD/DROP -->
+  <div id="page-add-drop" class="page">
+    <div class="sh"><div class="sh-l"><h2>Add / Drop</h2><span class="tag">scored vs. your roster</span></div></div>
+    <div id="addrop-content"><div class="loading"><div class="spin"></div>scanning the wire...</div></div>
+  </div>
+
+  <!-- STANDINGS -->
+  <div id="page-standings" class="page">
+    <div class="sh"><div class="sh-l"><h2>League Standings</h2></div></div>
+    <div id="standings-content"><div class="loading"><div class="spin"></div>fetching standings...</div></div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="page-leaderboard" class="page">
+    <div class="lb-controls">
+      <button class="on" onclick="lb('batters','savant',this)">Batters · Savant</button>
+      <button onclick="lb('pitchers','savant',this)">Pitchers · Savant</button>
+      <button onclick="lb('batters','fangraphs',this)">Batters · FG</button>
+      <button onclick="lb('pitchers','fangraphs',this)">Pitchers · FG</button>
+    </div>
+    <div id="lb-content"><div class="loading"><div class="spin"></div>loading...</div></div>
+  </div>
+
+</main>
+
+<!-- Markdown export modal -->
+<div id="modal-bg" class="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Markdown Export</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <textarea id="md-out" readonly></textarea>
+    <div class="modal-foot">
+      <button onclick="copyMd()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let loaded = {};
+let lbState = { type:'batters', source:'savant' };
+
+function nav(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('on'));
+  document.getElementById('page-' + page).classList.add('on');
+  btn.classList.add('on');
+  if (!loaded[page]) { loaded[page] = true; loaders[page](); }
+}
+
+const loaders = {
+  watchlist:   loadWatchlist,
+  roster:      loadRoster,
+  'add-drop':  loadAddDrop,
+  standings:   loadStandings,
+  leaderboard: loadLeaderboard,
+};
+
+async function api(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function apiText(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(await r.text());
+  return r.text();
+}
+function err(id, msg) { document.getElementById(id).innerHTML = `<div class="err">⚠ ${msg}</div>`; }
+function f3(v)  { return v == null || v === '' || isNaN(+v) ? '—' : (+v).toFixed(3); }
+function fpct(v){ if (v == null || v === '' || isNaN(+v)) return '—'; const n=+v; return (n<1?n*100:n).toFixed(1)+'%'; }
+
+// ── Watchlist ─────────────────────────────────────────────────────────────────
+async function loadWatchlist() {
+  try {
+    const data = await api('/api/watchlist');
+    document.getElementById('buys').innerHTML = data.buys.length
+      ? data.buys.map(p => watchRow(p, 'buy')).join('')
+      : '<div class="loading">No strong buy signals right now.</div>';
+    document.getElementById('sells').innerHTML = data.sells.length
+      ? data.sells.map(p => watchRow(p, 'sell')).join('')
+      : '<div class="loading">Your roster looks clean — no sell signals.</div>';
+  } catch(e) { err('buys', e.message); }
+}
+
+function watchRow(p, kind) {
+  const icon = kind === 'buy'
+    ? (p.strength === 'strong' ? '↑↑' : '↑')
+    : (p.strength === 'strong' ? '↓↓' : '↓');
+  const ptag = p.status === 'fa'    ? '<span class="ptag fa">FA</span>'
+            : p.status === 'yours' ? '<span class="ptag yours">YOURS</span>'
+            : '<span class="ptag">ROST</span>';
+  const reasoning = p.reasoning.map(r => `<div>${r}</div>`).join('');
+  const scoreDisplay = (p.composite * 100).toFixed(0);
+  return `<div class="watch-row ${kind} ${p.strength}">
+    <div class="badge-icon">${icon}</div>
+    <div class="watch-meta">
+      <div class="watch-name">${p.name} ${ptag}</div>
+      <div class="watch-reason">${reasoning}</div>
+    </div>
+    <div class="watch-score">${scoreDisplay}</div>
+  </div>`;
+}
+
+async function exportMarkdown() {
+  try {
+    const md = await apiText('/api/watchlist/markdown');
+    document.getElementById('md-out').value = md;
+    document.getElementById('modal-bg').classList.add('on');
+  } catch(e) { alert('Export failed: ' + e.message); }
+}
+function closeModal()  { document.getElementById('modal-bg').classList.remove('on'); }
+function copyMd() {
+  const ta = document.getElementById('md-out');
+  ta.select(); document.execCommand('copy');
+  alert('Copied to clipboard.');
+}
+
+// ── Roster / Matchup ──────────────────────────────────────────────────────────
+const SLOT_ORDER = ['C','1B','2B','3B','SS','MI','CI','LF','CF','RF','OF','DH','UTIL','SP','RP','P','BE','IL','IL10','NA'];
+
+function slotRank(slot) {
+  const i = SLOT_ORDER.indexOf(slot);
+  return i === -1 ? 999 : i;
+}
+
+async function loadRoster() {
+  document.getElementById('active-grid').innerHTML = '<div class="loading"><div class="spin"></div>pulling roster...</div>';
+  document.getElementById('bench-grid').innerHTML = '';
+  try {
+    const [players, matchup] = await Promise.all([api('/api/roster'), api('/api/matchup')]);
+    renderMatchup(matchup);
+
+    const sorted   = [...players].sort((a, b) => slotRank(a.lineup_slot) - slotRank(b.lineup_slot));
+    const hitters  = sorted.filter(p => !p.on_bench && !p.is_pitcher);
+    const pitchers = sorted.filter(p => !p.on_bench &&  p.is_pitcher);
+    const bench    = sorted.filter(p =>  p.on_bench);
+
+    document.getElementById('active-count').textContent =
+      `${hitters.length} hitters · ${pitchers.length} pitchers · ${bench.length} bench`;
+
+    document.getElementById('active-grid').innerHTML =
+      hitterTable(hitters) + pitcherTable(pitchers);
+    document.getElementById('bench-grid').innerHTML = benchTable(bench);
+  } catch(e) { err('active-grid', e.message); }
+}
+
+function hitterTable(rows) {
+  if (!rows.length) return '';
+  const body = rows.map(p => `
+    <tr>
+      <td class="slot-cell">${p.lineup_slot || '—'}</td>
+      <td class="name-cell">${p.name}${p.injured ? `<span class="inj">${p.injury_status||'INJ'}</span>` : ''}</td>
+      <td class="meta-cell">${(p.positions||[]).join(', ')}</td>
+      <td class="meta-cell">${p.pro_team || '—'}</td>
+      <td class="stat">${f3(p.xwoba)}</td>
+      <td class="stat">${fpct(p.barrel_batted_rate)}</td>
+      <td class="stat">${fpct(p.hard_hit_percent)}</td>
+      <td class="stat">${fpct(p.k_percent)}</td>
+      <td class="pts">${p.fantasy_score ?? '—'}</td>
+    </tr>`).join('');
+  return `<div class="roster-section">
+    <table class="roster-table">
+      <thead><tr>
+        <th>Slot</th><th>Player</th><th>Pos</th><th>Team</th>
+        <th class="r">xwOBA</th><th class="r">Barrel%</th>
+        <th class="r">HH%</th><th class="r">K%</th>
+        <th class="r">Pts</th>
+      </tr></thead>
+      <tbody>${body}</tbody>
+    </table>
+  </div>`;
+}
+
+function pitcherTable(rows) {
+  if (!rows.length) return '';
+  const body = rows.map(p => `
+    <tr>
+      <td class="slot-cell">${p.lineup_slot || '—'}</td>
+      <td class="name-cell">${p.name}${p.injured ? `<span class="inj">${p.injury_status||'INJ'}</span>` : ''}</td>
+      <td class="meta-cell">${(p.positions||[]).join(', ')}</td>
+      <td class="meta-cell">${p.pro_team || '—'}</td>
+      <td class="stat">${f3(p.xera)}</td>
+      <td class="stat">${fpct(p.k_percent)}</td>
+      <td class="stat">${fpct(p.bb_percent)}</td>
+      <td class="stat">${fpct(p.whiff_percent)}</td>
+      <td class="pts">${p.fantasy_score ?? '—'}</td>
+    </tr>`).join('');
+  return `<div class="roster-section">
+    <table class="roster-table">
+      <thead><tr>
+        <th>Slot</th><th>Player</th><th>Pos</th><th>Team</th>
+        <th class="r">xERA</th><th class="r">K%</th>
+        <th class="r">BB%</th><th class="r">Whiff%</th>
+        <th class="r">Pts</th>
+      </tr></thead>
+      <tbody>${body}</tbody>
+    </table>
+  </div>`;
+}
+
+function benchTable(rows) {
+  if (!rows.length) return '';
+  const body = rows.map(p => {
+    const stat1 = p.is_pitcher ? f3(p.xera)            : f3(p.xwoba);
+    const stat2 = p.is_pitcher ? fpct(p.k_percent)     : fpct(p.barrel_batted_rate);
+    const stat3 = p.is_pitcher ? fpct(p.whiff_percent) : fpct(p.hard_hit_percent);
+    const stat1Label = p.is_pitcher ? 'xERA' : 'xwOBA';
+    return `
+      <tr class="bench">
+        <td class="slot-cell">${p.lineup_slot || '—'}</td>
+        <td class="name-cell">${p.name}${p.injured ? `<span class="inj">${p.injury_status||'INJ'}</span>` : ''}</td>
+        <td class="meta-cell">${(p.positions||[]).join(', ')}</td>
+        <td class="meta-cell">${p.pro_team || '—'}</td>
+        <td class="stat" title="${stat1Label}">${stat1}</td>
+        <td class="stat">${stat2}</td>
+        <td class="stat">${stat3}</td>
+        <td class="pts">${p.fantasy_score ?? '—'}</td>
+      </tr>`;
+  }).join('');
+  return `<table class="roster-table">
+    <thead><tr>
+      <th>Slot</th><th>Player</th><th>Pos</th><th>Team</th>
+      <th class="r">Quality</th><th class="r">·</th>
+      <th class="r">·</th><th class="r">Pts</th>
+    </tr></thead>
+    <tbody>${body}</tbody>
+  </table>`;
+}
+
+function renderMatchup(m) {
+  if (!m || !m.opponent) return;
+  document.getElementById('matchup-banner').innerHTML = `
+    <div class="matchup-strip">
+      <div><div class="team-label me">L Train Legends</div></div>
+      <div>
+        <div class="score-num">${m.my_score}<span class="dash">–</span>${m.opp_score}</div>
+        <div class="score-tag">Current Week</div>
+      </div>
+      <div style="text-align:right"><div class="team-label">${m.opponent}</div></div>
+    </div>`;
+}
+
+// ── Add/Drop ──────────────────────────────────────────────────────────────────
+async function loadAddDrop() {
+  try {
+    const data = await api('/api/add-drop?size=40');
+    if (!data.length) {
+      document.getElementById('addrop-content').innerHTML = '<div class="loading">No clear upgrades right now.</div>';
+      return;
+    }
+    document.getElementById('addrop-content').innerHTML = `<div class="watch-list">${
+      data.map(s => `<div class="watch-row buy moderate">
+        <div class="badge-icon">+</div>
+        <div class="watch-meta">
+          <div class="watch-name">${s.add} <span class="ptag">${s.is_pitcher?'P':'B'}</span></div>
+          <div class="watch-reason">drop ${s.drop} (${s.drop_score} → ${s.add_score} pts)</div>
+        </div>
+        <div class="watch-score">+${s.gain}</div>
+      </div>`).join('')
+    }</div>`;
+  } catch(e) { err('addrop-content', e.message); }
+}
+
+// ── Standings ─────────────────────────────────────────────────────────────────
+async function loadStandings() {
+  try {
+    const data = await api('/api/standings');
+    document.getElementById('standings-content').innerHTML = `<div class="standings-list">${
+      data.map((t, i) => `
+        <div class="standing-row${t.team_name.includes('L Train')?'  me':''}">
+          <div class="rank-num">${i+1}</div>
+          <div><div class="standing-name">${t.team_name}<small>${t.owner}</small></div></div>
+          <div class="wl">${t.wins}–${t.losses}${t.ties ? '–' + t.ties : ''}</div>
+          <div class="pts-for">#${t.standing}</div>
+        </div>`).join('')
+    }</div>`;
+  } catch(e) { err('standings-content', e.message); }
+}
+
+// ── Leaderboard ───────────────────────────────────────────────────────────────
+function lb(type, source, btn) {
+  lbState = { type, source };
+  loaded.leaderboard = false;
+  document.querySelectorAll('.lb-controls button').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  loadLeaderboard();
+}
+
+async function loadLeaderboard() {
+  document.getElementById('lb-content').innerHTML = '<div class="loading"><div class="spin"></div>loading...</div>';
+  try {
+    const { type, source } = lbState;
+    const data = await api(`/api/leaderboard/${type}?source=${source}`);
+    if (!data.length) { document.getElementById('lb-content').innerHTML = '<div class="loading">No data.</div>'; return; }
+    const isBat = type === 'batters';
+    const nameKey = 'last_name, first_name' in data[0] ? 'last_name, first_name' : 'PlayerName';
+    const cols = isBat
+      ? ['xwoba','barrel_batted_rate','hard_hit_percent','k_percent','bb_percent','exit_velocity_avg']
+      : ['xera','k_percent','bb_percent','whiff_percent','hard_hit_percent'];
+    const heads = isBat
+      ? ['xwOBA','Barrel%','HH%','K%','BB%','EV']
+      : ['xERA','K%','BB%','Whiff%','HH%'];
+    const rows = data.slice(0,50).map((r,i) => `
+      <tr>
+        <td class="rank">${i+1}</td>
+        <td class="hl">${r[nameKey]||r.player_name||'—'}</td>
+        ${cols.map(c => {
+          const v = r[c];
+          const fmt = (c.includes('percent')||c.includes('rate')) ? fpct(v) : f3(v);
+          return `<td>${fmt}</td>`;
+        }).join('')}
+      </tr>`).join('');
+    document.getElementById('lb-content').innerHTML = `
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>Name</th>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+  } catch(e) { err('lb-content', e.message); }
+}
+
+loaded.watchlist = true;
+loadWatchlist();
+</script>
+</body>
+</html>
