@@ -63,17 +63,17 @@ export function Roster() {
 
 function MatchupBanner({ matchup }: { matchup: Matchup }) {
   return (
-    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-5 bg-zinc-900 border border-zinc-800 rounded-sm px-7 py-5 mb-6">
-      <div className="font-bold tracking-[0.1em] text-lg uppercase text-lime-400">
+    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-5 bg-cream-deep border border-oak rounded-sm px-7 py-5 mb-6">
+      <div className="font-bold tracking-[0.1em] text-lg uppercase text-oxblood">
         L Train Legends
       </div>
       <div className="text-center">
         <div className="font-bold tracking-[0.4em] text-4xl">
           {matchup.my_score}
-          <span className="text-zinc-700 px-2">–</span>
+          <span className="text-leather-soft px-2">–</span>
           {matchup.opp_score}
         </div>
-        <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-zinc-500 mt-1">
+        <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-leather mt-1">
           Current Week
         </div>
       </div>
@@ -119,14 +119,14 @@ function PitcherTable({ rows }: { rows: RosterPlayer[] }) {
 function BenchTable({ rows }: { rows: RosterPlayer[] }) {
   // Bench can mix hitters and pitchers — show type-appropriate stats per row
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-sm overflow-hidden">
+    <div className="bg-cream-deep border border-oak rounded-sm overflow-hidden">
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-zinc-800">
+          <tr className="bg-oak">
             {["Slot","Player","Pos","Team","Quality","·","·","Pts"].map((h, i) => (
               <th
                 key={i}
-                className={`font-mono text-[9px] tracking-wider uppercase text-zinc-500 px-3 py-2 ${i >= 4 ? "text-right" : "text-left"}`}
+                className={`font-mono text-[9px] tracking-wider uppercase text-leather px-3 py-2 ${i >= 4 ? "text-right" : "text-left"}`}
               >
                 {h}
               </th>
@@ -141,29 +141,29 @@ function BenchTable({ rows }: { rows: RosterPlayer[] }) {
             return (
               <tr
                 key={i}
-                className="border-b border-zinc-800 last:border-b-0 opacity-55 hover:bg-white/[.02] transition-colors"
+                className="border-b border-oak last:border-b-0 opacity-55 hover:bg-white/[.02] transition-colors"
               >
-                <td className="font-mono text-[10px] tracking-wider uppercase text-zinc-500 px-3 py-3 w-16">
+                <td className="font-mono text-[10px] tracking-wider uppercase text-leather px-3 py-3 w-16">
                   {p.lineup_slot || "—"}
                 </td>
                 <td className="font-semibold text-[14px] px-3 py-3">
                   {p.name}
                   {p.injured && (
-                    <span className="ml-1.5 font-mono text-[10px] text-red-500">
+                    <span className="ml-1.5 font-mono text-[10px] text-rust">
                       {p.injury_status || "INJ"}
                     </span>
                   )}
                 </td>
-                <td className="font-mono text-[11px] text-zinc-500 px-3 py-3">
+                <td className="font-mono text-[11px] text-leather px-3 py-3">
                   {(p.positions || []).join(", ")}
                 </td>
-                <td className="font-mono text-[11px] text-zinc-500 px-3 py-3">
+                <td className="font-mono text-[11px] text-leather px-3 py-3">
                   {p.pro_team || "—"}
                 </td>
                 <td className="font-mono text-[12px] text-right px-3 py-3">{stat1}</td>
                 <td className="font-mono text-[12px] text-right px-3 py-3">{stat2}</td>
                 <td className="font-mono text-[12px] text-right px-3 py-3">{stat3}</td>
-                <td className="font-bold tracking-wider text-[16px] text-right px-3 py-3 text-zinc-500">
+                <td className="font-bold tracking-wider text-[16px] text-right px-3 py-3 text-leather">
                   {p.fantasy_score ?? "—"}
                 </td>
               </tr>
@@ -184,14 +184,14 @@ function RosterTable({
   renderStats: (p: RosterPlayer) => string[]
 }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-sm overflow-hidden mb-3">
+    <div className="bg-cream-deep border border-oak rounded-sm overflow-hidden mb-3">
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-zinc-800">
+          <tr className="bg-oak">
             {headers.map((h, i) => (
               <th
                 key={i}
-                className={`font-mono text-[9px] tracking-wider uppercase text-zinc-500 px-3 py-2 ${i >= 4 ? "text-right" : "text-left"}`}
+                className={`font-mono text-[9px] tracking-wider uppercase text-leather px-3 py-2 ${i >= 4 ? "text-right" : "text-left"}`}
               >
                 {h}
               </th>
@@ -202,23 +202,23 @@ function RosterTable({
           {rows.map((p, i) => (
             <tr
               key={i}
-              className="border-b border-zinc-800 last:border-b-0 hover:bg-white/[.02] transition-colors"
+              className="border-b border-oak last:border-b-0 hover:bg-white/[.02] transition-colors"
             >
-              <td className="font-mono text-[10px] tracking-wider uppercase text-lime-400 px-3 py-3 w-16">
+              <td className="font-mono text-[10px] tracking-wider uppercase text-oxblood px-3 py-3 w-16">
                 {p.lineup_slot || "—"}
               </td>
               <td className="font-semibold text-[14px] px-3 py-3">
                 {p.name}
                 {p.injured && (
-                  <span className="ml-1.5 font-mono text-[10px] text-red-500">
+                  <span className="ml-1.5 font-mono text-[10px] text-rust">
                     {p.injury_status || "INJ"}
                   </span>
                 )}
               </td>
-              <td className="font-mono text-[11px] text-zinc-500 px-3 py-3">
+              <td className="font-mono text-[11px] text-leather px-3 py-3">
                 {(p.positions || []).join(", ")}
               </td>
-              <td className="font-mono text-[11px] text-zinc-500 px-3 py-3">
+              <td className="font-mono text-[11px] text-leather px-3 py-3">
                 {p.pro_team || "—"}
               </td>
               {renderStats(p).map((s, si) => (
@@ -253,7 +253,7 @@ function SectionHeader({ title, tag }: { title: string; tag?: string }) {
     <div className="flex items-baseline gap-2.5 mb-3.5">
       <h2 className="font-bold tracking-[0.15em] text-lg uppercase">{title}</h2>
       {tag && (
-        <span className="font-mono text-[9px] tracking-wider uppercase text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-sm">
+        <span className="font-mono text-[9px] tracking-wider uppercase text-leather bg-oak px-2 py-0.5 rounded-sm">
           {tag}
         </span>
       )}
@@ -263,8 +263,8 @@ function SectionHeader({ title, tag }: { title: string; tag?: string }) {
 
 function LoadingState() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-zinc-500 font-mono text-xs">
-      <div className="w-7 h-7 border-2 border-zinc-800 border-t-lime-400 rounded-full animate-spin" />
+    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
+      <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
       pulling roster...
     </div>
   )
@@ -273,7 +273,7 @@ function LoadingState() {
 function ErrorState({ message }: { message: string }) {
   return (
     <div className="p-7">
-      <div className="bg-red-500/10 border border-red-500/30 rounded p-3.5 font-mono text-xs text-red-500">
+      <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">
         ⚠ {message}
       </div>
     </div>

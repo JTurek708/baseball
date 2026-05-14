@@ -55,10 +55,12 @@ def get_roster() -> list[dict]:
 
 def get_matchup() -> dict:
     league = _league()
-    team   = get_my_team()
+    my_team_id = get_my_team().team_id
     for box in league.box_scores():
-        if box.home_team == team or box.away_team == team:
-            is_home = box.home_team == team
+        home_id = box.home_team.team_id
+        away_id = box.away_team.team_id
+        if home_id == my_team_id or away_id == my_team_id:
+            is_home = home_id == my_team_id
             return {
                 "my_score":  box.home_score if is_home else box.away_score,
                 "opp_score": box.away_score if is_home else box.home_score,

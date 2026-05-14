@@ -10,7 +10,7 @@ import { Leaderboard } from "./pages/Leaderboard"
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-zinc-950 text-zinc-200">
+      <div className="min-h-screen bg-cream text-walnut">
         <Header />
         <Nav />
         <main className="max-w-7xl mx-auto">

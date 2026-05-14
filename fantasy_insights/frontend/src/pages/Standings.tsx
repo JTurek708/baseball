@@ -27,19 +27,19 @@ export function Standings() {
           return (
             <div
               key={i}
-              className={`grid grid-cols-[28px_1fr_auto_auto] items-center gap-4 bg-zinc-900 border rounded-sm px-4 py-3 ${
-                isMine ? "border-lime-400/30" : "border-zinc-800"
+              className={`grid grid-cols-[28px_1fr_auto_auto] items-center gap-4 bg-cream-deep border rounded-sm px-4 py-3 ${
+                isMine ? "border-oxblood/30" : "border-oak"
               }`}
             >
-              <div className="font-bold text-lg text-zinc-700">{i + 1}</div>
+              <div className="font-bold text-lg text-leather-soft">{i + 1}</div>
               <div>
                 <div className="font-semibold">{t.team_name}</div>
-                <div className="font-mono text-[10px] text-zinc-500 font-normal">{t.owner}</div>
+                <div className="font-mono text-[10px] text-leather font-normal">{t.owner}</div>
               </div>
-              <div className="font-mono text-xs text-zinc-500">
+              <div className="font-mono text-xs text-leather">
                 {t.wins}–{t.losses}{t.ties ? "–" + t.ties : ""}
               </div>
-              <div className="font-bold text-lg text-zinc-500">#{t.standing}</div>
+              <div className="font-bold text-lg text-leather">#{t.standing}</div>
             </div>
           )
         })}
@@ -50,8 +50,8 @@ export function Standings() {
 
 function LoadingState() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-zinc-500 font-mono text-xs">
-      <div className="w-7 h-7 border-2 border-zinc-800 border-t-lime-400 rounded-full animate-spin" />
+    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
+      <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
       fetching standings...
     </div>
   )
@@ -60,7 +60,7 @@ function LoadingState() {
 function ErrorState({ message }: { message: string }) {
   return (
     <div className="p-7">
-      <div className="bg-red-500/10 border border-red-500/30 rounded p-3.5 font-mono text-xs text-red-500">
+      <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">
         ⚠ {message}
       </div>
     </div>
