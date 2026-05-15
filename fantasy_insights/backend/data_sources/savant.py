@@ -65,3 +65,11 @@ def lookup(player_name: str, is_pitcher: bool = False) -> dict:
            df[col].str.lower().str.contains(first, na=False)
     hits = df[mask]
     return hits.iloc[0].to_dict() if not hits.empty else {}
+
+def data_last_updated() -> str | None:
+    """ISO timestamp of the most recent Savant leaderboard refresh.
+    Returns the oldest of the batter/pitcher timestamps — the conservative
+    'everything is at least this fresh' answer."""
+    keys = [f"sv_bat_{YEAR}_q", f"sv_pit_{YEAR}_q"]
+    times = [t for k in keys if (t := cache.last_updated(k))]
+    return min(times) if times else None

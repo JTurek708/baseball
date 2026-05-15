@@ -101,3 +101,7 @@ def lb_pitchers(source: str = "savant"):
     except Exception as e:
         raise HTTPException(500, str(e))
 
+@app.get("/api/last-updated")
+def last_updated():
+    """When the Savant data backing the watchlist/leaderboard was last refreshed."""
+    return {"last_updated": savant.data_last_updated()}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { apiGet, apiGetText } from "@/lib/api"
 import type { Watchlist as WatchlistData, WatchlistPlayer } from "@/lib/types"
 import { LoadingState, ErrorState } from "@/components/States"
+import { LastUpdated } from "@/components/LastUpdated"
 
 export function Watchlist() {
   // ── React hooks: useState gives a component "memory" between renders ──
@@ -39,6 +40,9 @@ export function Watchlist() {
 
   return (
     <div className="p-7">
+      <div className="flex justify-end mb-3">
+        <LastUpdated />
+      </div>
       {/* Buy section header */}
       <SectionHeader
         title="Buy Candidates"
