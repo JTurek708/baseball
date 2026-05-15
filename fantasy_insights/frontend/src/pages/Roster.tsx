@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { apiGet } from "@/lib/api"
 import type { RosterPlayer, Matchup } from "@/lib/types"
+import { LoadingState, ErrorState } from "@/components/States"
 
 // ESPN's standard slot ordering. Anything not in this list goes to the bottom.
 const SLOT_ORDER = ['C','1B','2B','3B','SS','MI','CI','LF','CF','RF','OF','DH','UTIL','SP','RP','P','BE','IL','IL10','NA']
@@ -30,7 +31,7 @@ export function Roster() {
   }, [])
 
   if (error) return <ErrorState message={error} />
-  if (!players) return <LoadingState />
+  if (!players) return <LoadingState message="pulling roster..." />
 
   // Sort by slot order, then split into three groups
   const sorted   = [...players].sort((a, b) => slotRank(a.lineup_slot) - slotRank(b.lineup_slot))
@@ -261,21 +262,3 @@ function SectionHeader({ title, tag }: { title: string; tag?: string }) {
   )
 }
 
-function LoadingState() {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
-      <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
-      pulling roster...
-    </div>
-  )
-}
-
-function ErrorState({ message }: { message: string }) {
-  return (
-    <div className="p-7">
-      <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">
-        ⚠ {message}
-      </div>
-    </div>
-  )
-}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { apiGet, apiGetText } from "@/lib/api"
 import type { Watchlist as WatchlistData, WatchlistPlayer } from "@/lib/types"
+import { LoadingState, ErrorState } from "@/components/States"
 
 export function Watchlist() {
   // ── React hooks: useState gives a component "memory" between renders ──
@@ -21,7 +22,7 @@ export function Watchlist() {
   }, [])
 
   // ── Loading and error states ──
-  if (loading) return <LoadingState />
+  if (loading) return <LoadingState message="scanning the league..." />
   if (error)   return <ErrorState message={error} />
   if (!data)   return null
 
@@ -256,21 +257,3 @@ function ExportModal({
   )
 }
 
-function LoadingState() {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
-      <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
-      scanning the league...
-    </div>
-  )
-}
-
-function ErrorState({ message }: { message: string }) {
-  return (
-    <div className="p-7">
-      <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">
-        ⚠ {message}
-      </div>
-    </div>
-  )
-}
