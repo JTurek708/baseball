@@ -37,3 +37,10 @@ def save(key: str, data):
     """Write data to cache."""
     with open(_path(key), "w") as f:
         json.dump(data, f, default=str)
+
+def last_updated(key: str) -> str | None:
+    """ISO timestamp of when this cache key was last written, or None if absent."""
+    p = _path(key)
+    if not os.path.exists(p):
+        return None
+    return datetime.fromtimestamp(os.path.getmtime(p)).isoformat()

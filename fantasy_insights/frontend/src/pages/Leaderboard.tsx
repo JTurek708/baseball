@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { apiGet } from "@/lib/api"
 import { LoadingState, ErrorState } from "@/components/States"
+import { LastUpdated } from "@/components/LastUpdated"
 
 type LbType = "batters" | "pitchers"
 type LbSource = "savant" | "fangraphs"
@@ -32,11 +33,14 @@ export function Leaderboard() {
 
   return (
     <div className="p-7">
-      <div className="flex gap-1.5 mb-3.5 flex-wrap">
-        <ToggleButton active={type === "batters" && source === "savant"}    onClick={() => { setType("batters");  setSource("savant"); }}>Batters · Savant</ToggleButton>
-        <ToggleButton active={type === "pitchers" && source === "savant"}   onClick={() => { setType("pitchers"); setSource("savant"); }}>Pitchers · Savant</ToggleButton>
-        <ToggleButton active={type === "batters" && source === "fangraphs"} onClick={() => { setType("batters");  setSource("fangraphs"); }}>Batters · FG</ToggleButton>
-        <ToggleButton active={type === "pitchers" && source === "fangraphs"} onClick={() => { setType("pitchers"); setSource("fangraphs"); }}>Pitchers · FG</ToggleButton>
+      <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2">
+        <div className="flex gap-1.5 flex-wrap">
+          <ToggleButton active={type === "batters" && source === "savant"}    onClick={() => { setType("batters");  setSource("savant"); }}>Batters · Savant</ToggleButton>
+          <ToggleButton active={type === "pitchers" && source === "savant"}   onClick={() => { setType("pitchers"); setSource("savant"); }}>Pitchers · Savant</ToggleButton>
+          <ToggleButton active={type === "batters" && source === "fangraphs"} onClick={() => { setType("batters");  setSource("fangraphs"); }}>Batters · FG</ToggleButton>
+          <ToggleButton active={type === "pitchers" && source === "fangraphs"} onClick={() => { setType("pitchers"); setSource("fangraphs"); }}>Pitchers · FG</ToggleButton>
+        </div>
+        <LastUpdated />
       </div>
 
       {error ? (
