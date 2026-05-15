@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { apiGet } from "@/lib/api"
+import { LoadingState, ErrorState } from "@/components/States"
 
 type LbType = "batters" | "pitchers"
 type LbSource = "savant" | "fangraphs"
@@ -39,12 +40,9 @@ export function Leaderboard() {
       </div>
 
       {error ? (
-        <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">⚠ {error}</div>
+        <ErrorState message={error} />
       ) : loading ? (
-        <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
-          <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
-          loading...
-        </div>
+        <LoadingState message="loading..." />
       ) : !data || data.length === 0 ? (
         <div className="text-leather font-mono text-xs py-12 text-center">No data.</div>
       ) : (

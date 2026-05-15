@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { apiGet } from "@/lib/api"
 import type { StandingTeam } from "@/lib/types"
+import { LoadingState, ErrorState } from "@/components/States"
 
 export function Standings() {
   const [teams, setTeams] = useState<StandingTeam[] | null>(null)
@@ -13,7 +14,7 @@ export function Standings() {
   }, [])
 
   if (error) return <ErrorState message={error} />
-  if (!teams) return <LoadingState />
+  if (!teams) return <LoadingState message="fetching standings..." />
 
   return (
     <div className="p-7">
@@ -48,21 +49,3 @@ export function Standings() {
   )
 }
 
-function LoadingState() {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 gap-3.5 text-leather font-mono text-xs">
-      <div className="w-7 h-7 border-2 border-oak border-t-oxblood rounded-full animate-spin" />
-      fetching standings...
-    </div>
-  )
-}
-
-function ErrorState({ message }: { message: string }) {
-  return (
-    <div className="p-7">
-      <div className="bg-rust/10 border border-rust/30 rounded p-3.5 font-mono text-xs text-rust">
-        ⚠ {message}
-      </div>
-    </div>
-  )
-}
