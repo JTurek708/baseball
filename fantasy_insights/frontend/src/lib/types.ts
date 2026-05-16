@@ -94,3 +94,28 @@ export interface StandingTeam {
   ties: number
   standing: number
 }
+
+// ── Trend types ───────────────────────────────────────────────────────────────
+
+export interface TrendMetric {
+  label: string
+  delta: number
+  recent: number
+  baseline: number
+  window: string
+  sample: number
+}
+
+export interface TrendPlayer {
+  name: string
+  direction: "buy" | "sell"
+  magnitude: number
+  signal_count: number
+  reasoning: string[]
+  metrics: TrendMetric[]
+}
+
+export interface TrendsResponse {
+  buys: TrendPlayer[]
+  sells: TrendPlayer[]
+}

@@ -6,6 +6,7 @@ import { Roster }    from "./pages/Roster"
 import { AddDrop }   from "./pages/AddDrop"
 import { Standings } from "./pages/Standings"
 import { Leaderboard } from "./pages/Leaderboard"
+import { Trends } from "./pages/Trends"
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/add-drop"    element={<AddDrop />} />
             <Route path="/standings"   element={<Standings />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/trends"      element={<Trends />} />
           </Routes>
         </main>
       </div>
