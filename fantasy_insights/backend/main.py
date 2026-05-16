@@ -11,6 +11,7 @@ from fastapi.responses import PlainTextResponse
 from backend.data_sources import espn, savant, fangraphs
 from backend.signals import composite
 from backend.value_model import enrich_roster, add_drop_suggestions
+from backend.signals import composite, trend
 
 app = FastAPI(title="Fantasy Hub")
 
@@ -105,3 +106,11 @@ def lb_pitchers(source: str = "savant"):
 def last_updated():
     """When the Savant data backing the watchlist/leaderboard was last refreshed."""
     return {"last_updated": savant.data_last_updated()}
+
+@app.get("/api/trends")
+def trends():
+    """Buy/sell candidates based on recent-window vs baseline shifts."""
+    try:
+        return trend.build_trends()
+    except Exception as e:
+        raise HTTPException(500, str(e))

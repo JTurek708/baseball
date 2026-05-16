@@ -41,3 +41,25 @@ PITCHER_BIG_GAP            = 1.00    # ≥ this is a "strong" signal
 # ── Watchlist sizing ──────────────────────────────────────────────────────────
 WATCHLIST_BUY_COUNT  = 100
 WATCHLIST_SELL_COUNT = 100
+
+# ── Trend engine thresholds ──────────────────────────────────────────────────
+# Window sizes (days)
+TREND_RECENT_DAYS         = 15
+TREND_BASELINE_RECENT_DAYS = 30   # the "30 days" baseline for the 15d-vs-30d comparison
+
+# Hitter thresholds — minimum absolute change in percentage points (or wOBA units)
+TREND_HITTER_BARREL    = 3.0
+TREND_HITTER_HH        = 4.0
+TREND_HITTER_K         = 4.0
+TREND_HITTER_BB        = 2.0
+TREND_HITTER_XWOBA_CON = 0.030
+
+# Pitcher thresholds
+TREND_PITCHER_K     = 4.0
+TREND_PITCHER_BB    = 2.0
+TREND_PITCHER_WHIFF = 4.0
+TREND_PITCHER_CSW   = 3.0
+TREND_PITCHER_VELO  = 1.0   # mph
+
+# How many candidates to surface
+TRENDS_LIST_SIZE = 100
